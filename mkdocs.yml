@@ -1,3 +1,10 @@
 site_name: PINN-ADT
 
-hidden: 'internal_endpoints.md'
+hidden: "internal_endpoints.md"
+
+nav:
+  - Home: "index.md"
+  - How to use: "how_to_use.md"
+
+theme:
+  name: material
