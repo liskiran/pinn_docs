@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-add-documentation-to-repositoty" class="md-skip">
+        <a href="#how-to-install" class="md-skip">
           Skip to content
         </a>
       
@@ -251,13 +251,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-to-add-documentation-to-repositoty" class="md-nav__link">
-    How to add documentation to repositoty
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#how-to-install" class="md-nav__link">
     How to install
   </a>
@@ -274,6 +267,13 @@
         <li class="md-nav__item">
   <a href="#how-to-run-docs" class="md-nav__link">
     How to run docs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Чтобы все работало надо добавить свой файл на репу надо:
   </a>
   
 </li>
@@ -311,13 +311,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-to-add-documentation-to-repositoty" class="md-nav__link">
-    How to add documentation to repositoty
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#how-to-install" class="md-nav__link">
     How to install
   </a>
@@ -338,6 +331,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Чтобы все работало надо добавить свой файл на репу надо:
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -353,13 +353,6 @@
                   
 
 
-  <h1>How to use</h1>
-
-<h2 id="how-to-add-documentation-to-repositoty">How to add documentation to repositoty</h2>
-<pre><code class="language-git">git add example.md
-git commit -m &quot;...&quot;
-git push -u origin main
-</code></pre>
 <h2 id="how-to-install">How to install</h2>
 <pre><code>pip install mkdocs
 </code></pre>
@@ -368,6 +361,11 @@ git push -u origin main
 </code></pre>
 <h2 id="how-to-run-docs">How to run docs</h2>
 <pre><code>mkdocs serve
+</code></pre>
+<h1 id="_1">Чтобы все работало надо добавить свой файл на репу надо:</h1>
+<pre><code class="language-python">- mkdocs serve # запускаем у себя локально чтобы изменилась папка с фронтом site
+- mkdocs gh-deploy # пушим свою папку site на репозиторий
+- https://liskiran.github.io/pinn_docs/ # смотрим результат
 </code></pre>
 
 
