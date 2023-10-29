@@ -6,13 +6,13 @@
 
 ### Тут описание подробностей
 
-# Neural Networks
+## Neural Networks
 
     - FullyConnected
     - ResNet
     - DenseNet
 
-# Geometry
+## Geometry
 
 - first
 - second
