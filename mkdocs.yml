@@ -3,8 +3,19 @@ site_name: PINN-ADT
 hidden: "internal_endpoints.md"
 
 nav:
-  - Home: "index.md"
-  - How to use: "how_to_use.md"
+  - Главная: "index.md"
+  - Руководство:
+    - Начало работы: "guide/getting_started.md"
+  - API:
+    - PINN: "api/PINN.md"
+    - Neural Network: "api/neural_network.md"
+    - Callbacks: "api/callbacks.md"
+    - Problems: "api/problems.md"
+    - Ensemble: "api/ensemble.md"
+    - Generation: "api/generation.md"
+    - Geometry: "api/geometry.md"
+    - Trainer: "api/trainer.md"
+  - Как писать документацию: "how_to_use.md"
 
 theme:
   name: material
