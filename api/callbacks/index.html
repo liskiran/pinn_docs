@@ -64,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#grid" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -352,6 +357,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Callbacks
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -361,6 +377,30 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#grid" class="md-nav__link">
+    Grid
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -511,6 +551,21 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#grid" class="md-nav__link">
+    Grid
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -526,7 +581,16 @@
 
   <h1>Callbacks</h1>
 
-
+<h2 id="grid">Grid</h2>
+<pre><code>CLASS callbacks.heatmap.Grid(low: np.array, high: np.array, n_points: Union[Sequence[int], int])
+</code></pre>
+<p>Класс, позволяющий создать сетку точек в указанной области. Сетку можно использовать для построения тепловых карт и расчета значения функций на структурированном наборе точек</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>low</strong> (np.array) – массив со значениями нижних границ для каждой оси,</li>
+<li><strong>high</strong> (np.array) – np.array со значениями верхних границ для каждой оси,</li>
+<li><strong>n_points</strong> (Union[Sequence[int], int]) — массив со значениями количества точек по каждой оси / общее количество точек на весь Grid.</li>
+</ul>
 
 
 
