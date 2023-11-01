@@ -8,3 +8,9 @@
 - **low** (np.array) – массив со значениями нижних границ для каждой оси,
 - **high** (np.array) – np.array со значениями верхних границ для каждой оси,
 - **n_points** (Union[Sequence[int], int]) — массив со значениями количества точек по каждой оси / общее количество точек на весь Grid.
+
+## BaseSave
+## BaseHeatmap
+## HeatmapError
+## HeatmapPrediction
+## PlotHeatmapSolution
