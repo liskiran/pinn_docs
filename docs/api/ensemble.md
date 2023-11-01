@@ -4,6 +4,7 @@
 Класс, позволяющий создать ансамбль моделей на основе списка **предобученных моделей** подходом [stacking](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/). После иницализации работает как torch.nn.Module. 
 
 **Параметры**
+
 - **layers_all** (List) – список слоев FNN модели, которая будет аггрегировать выходы предобученных моделей.
 - **pretrained_models** (List[torch.nn.Module]) – список предобученных моделей. 
     
@@ -57,6 +58,7 @@
 Модификация класса [Trainer](trainer.md) для обучения гибкого ансамбля. 
 
 **Параметры**
+
 - **ensemble_config**(List[[EnsembleInstance](#ensembleinstance)]) - информация для ансабля полученная с помощью [ensemble_builder](#ensemble_builder). 
 - **output_dim**(int) - размер выхода ансамбля. 
 - **\*\*kwargs** – аргументы [Trainer](trainer.md).
@@ -72,6 +74,7 @@
 Вспомогательная функция для сборки [EnsembleInstance](#ensembleinstance)
 
 **Параметры**
+
 - **models**(List[torch.nn.Module]) - список моделей для ансамблирования.
 - **generatorss_domain**(List[BaseGenerator]) - список генераторов (*в области*) для каждой модели.
 - **generators_bound**(List[BaseGenerator]) - список генераторов (*на границе*) для каждой модели.
