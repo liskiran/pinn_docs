@@ -641,9 +641,11 @@
 <pre><code>CLASS neural_network.ensemble.PretrainedEnsemble(layers_all: List, pretrained_models: List[torch.nn.Module])
 </code></pre>
 <p>Класс, позволяющий создать ансамбль моделей на основе списка <strong>предобученных моделей</strong> подходом <a href="https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/">stacking</a>. После иницализации работает как torch.nn.Module. </p>
-<p><strong>Параметры</strong>
-- <strong>layers_all</strong> (List) – список слоев FNN модели, которая будет аггрегировать выходы предобученных моделей.
-- <strong>pretrained_models</strong> (List[torch.nn.Module]) – список предобученных моделей. </p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>layers_all</strong> (List) – список слоев FNN модели, которая будет аггрегировать выходы предобученных моделей.</li>
+<li><strong>pretrained_models</strong> (List[torch.nn.Module]) – список предобученных моделей. </li>
+</ul>
 <p><strong>Методы</strong></p>
 <pre><code>forward(input: torch.Tensor)
 </code></pre>
@@ -664,7 +666,7 @@
 <h2 id="ensembleinstance">EnsembleInstance</h2>
 <pre><code>CLASS neural_network.ensemble.EnsembleInstance(model_name: str, pinn: PINN, optimizer: torch.optim.Optimizer, scheduler: torch.optim.LRScheduler)
 </code></pre>
-<p>Класс, хранящий нужную информацию одной модели для обучения гибкого ансамбля. Создается в <strong>ensemble_builder</strong>. </p>
+<p>Класс, хранящий нужную информацию одной модели для обучения гибкого ансамбля. Создается в <a href="#ensemble_builder">ensemble_builder</a>. </p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>model_name</strong>(str) – название текущей модели. Используется для сохранения и логгирования.</li>
@@ -680,10 +682,12 @@
 <pre><code>CLASS neural_network.ensemble.EnsembleTrainer(ensemble_config: List[EnsembleInstance], output_dim: int, **kwargs)
 </code></pre>
 <p>Модификация класса <a href="../trainer/">Trainer</a> для обучения гибкого ансамбля. </p>
-<p><strong>Параметры</strong>
-- <strong>ensemble_config</strong>(List[<a href="#ensembleinstance">EnsembleInstance</a>]) - информация для ансабля полученная с помощью <a href="#ensemble_builder">ensemble_builder</a>. 
-- <strong>output_dim</strong>(int) - размер выхода ансамбля. 
-- <strong>**kwargs</strong> – аргументы <a href="../trainer/">Trainer</a>.</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>ensemble_config</strong>(List[<a href="#ensembleinstance">EnsembleInstance</a>]) - информация для ансабля полученная с помощью <a href="#ensemble_builder">ensemble_builder</a>. </li>
+<li><strong>output_dim</strong>(int) - размер выхода ансамбля. </li>
+<li><strong>**kwargs</strong> – аргументы <a href="../trainer/">Trainer</a>.</li>
+</ul>
 <p><strong>Методы</strong></p>
 <pre><code>train -&gt; None
 </code></pre>
@@ -692,14 +696,16 @@
 <pre><code>FUNCTION neural_network.ensemble.ensemble_builder
 </code></pre>
 <p>Вспомогательная функция для сборки <a href="#ensembleinstance">EnsembleInstance</a></p>
-<p><strong>Параметры</strong>
-- <strong>models</strong>(List[torch.nn.Module]) - список моделей для ансамблирования.
-- <strong>generatorss_domain</strong>(List[BaseGenerator]) - список генераторов (<em>в области</em>) для каждой модели.
-- <strong>generators_bound</strong>(List[BaseGenerator]) - список генераторов (<em>на границе</em>) для каждой модели.
-- <strong>condition_idx</strong>(List[int]) - список индексов условий.
-- <strong>optimizers</strong>(List[Optimizer]) - список оптимизаторов
-- <strong>schedulers</strong>(List[LRScheduler]) - список scheduler'ов.
-- <strong>conditions</strong>(List[Condition]) - список условий. </p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>models</strong>(List[torch.nn.Module]) - список моделей для ансамблирования.</li>
+<li><strong>generatorss_domain</strong>(List[BaseGenerator]) - список генераторов (<em>в области</em>) для каждой модели.</li>
+<li><strong>generators_bound</strong>(List[BaseGenerator]) - список генераторов (<em>на границе</em>) для каждой модели.</li>
+<li><strong>condition_idx</strong>(List[int]) - список индексов условий.</li>
+<li><strong>optimizers</strong>(List[Optimizer]) - список оптимизаторов</li>
+<li><strong>schedulers</strong>(List[LRScheduler]) - список scheduler'ов.</li>
+<li><strong>conditions</strong>(List[Condition]) - список условий. </li>
+</ul>
 
 
 
