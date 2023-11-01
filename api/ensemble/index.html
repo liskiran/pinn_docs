@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../problems/">
+      
+      
+        <link rel="next" href="../generation/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>Test folder - PINN-ADT</title>
+        <title>Ensemble - PINN-ADT</title>
       
     
     
@@ -60,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#pretrainedensemble" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -92,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Test folder
+              Ensemble
             
           </span>
         </div>
@@ -261,18 +270,20 @@
       
   
   
+    
+  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -286,7 +297,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             API
@@ -299,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/PINN/" class="md-nav__link">
+      <a href="../PINN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -319,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/neural_network/" class="md-nav__link">
+      <a href="../neural_network/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -339,7 +350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/callbacks/" class="md-nav__link">
+      <a href="../callbacks/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -359,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/problems/" class="md-nav__link">
+      <a href="../problems/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -377,9 +388,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../api/ensemble/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Ensemble
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -388,6 +417,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pretrainedensemble" class="md-nav__link">
+    PretrainedEnsemble
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trainableensemble" class="md-nav__link">
+    TrainableEnsemble
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensembleinstance" class="md-nav__link">
+    EnsembleInstance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensembletrainer" class="md-nav__link">
+    EnsembleTrainer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensemble_builder" class="md-nav__link">
+    ensemble_builder
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -399,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/generation/" class="md-nav__link">
+      <a href="../generation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -419,7 +501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/geometry/" class="md-nav__link">
+      <a href="../geometry/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -439,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/trainer/" class="md-nav__link">
+      <a href="../trainer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -497,6 +579,49 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pretrainedensemble" class="md-nav__link">
+    PretrainedEnsemble
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trainableensemble" class="md-nav__link">
+    TrainableEnsemble
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensembleinstance" class="md-nav__link">
+    EnsembleInstance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensembletrainer" class="md-nav__link">
+    EnsembleTrainer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensemble_builder" class="md-nav__link">
+    ensemble_builder
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -510,9 +635,71 @@
                   
 
 
-  <h1>Test folder</h1>
+  <h1>Ensemble</h1>
 
-
+<h2 id="pretrainedensemble">PretrainedEnsemble</h2>
+<pre><code>CLASS neural_network.ensemble.PretrainedEnsemble(layers_all: List, pretrained_models: List[torch.nn.Module])
+</code></pre>
+<p>Класс, позволяющий создать ансамбль моделей на основе списка <strong>предобученных моделей</strong> подходом <a href="https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/">stacking</a>. После иницализации работает как torch.nn.Module. </p>
+<p><strong>Параметры</strong>
+- <strong>layers_all</strong> (List) – список слоев FNN модели, которая будет аггрегировать выходы предобученных моделей.
+- <strong>pretrained_models</strong> (List[torch.nn.Module]) – список предобученных моделей. </p>
+<p><strong>Методы</strong></p>
+<pre><code>forward(input: torch.Tensor)
+</code></pre>
+<p>Выполняет forward-pass ансамбля. </p>
+<h2 id="trainableensemble">TrainableEnsemble</h2>
+<pre><code>CLASS neural_network.ensemble.TrainableEnsemble(train_model_list: List[torch.nn.Module])
+</code></pre>
+<p>Класс, позволяющий создать ансамбль из еще не обученых моделей, для обучения ансамбля с нуля. После иницализации работает как torch.nn.Module. </p>
+<p>Если вы используете этот класс, то для обучения моделей из ансамбля будут применяется один и тот же optimizer, scheduler и generator. Для обучения более гибкого ансамбля с нуля используется <a href="#ensembletrainer">EnsembleTrainer</a> и пример #TODO</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>train_model_list</strong>(List[torch.nn.Module]) – список моделей для ансамблирования.</li>
+</ul>
+<p><strong>Методы</strong></p>
+<pre><code>forward(input: torch.Tensor)
+</code></pre>
+<p>Выполняет forward-pass ансамбля.</p>
+<h2 id="ensembleinstance">EnsembleInstance</h2>
+<pre><code>CLASS neural_network.ensemble.EnsembleInstance(model_name: str, pinn: PINN, optimizer: torch.optim.Optimizer, scheduler: torch.optim.LRScheduler)
+</code></pre>
+<p>Класс, хранящий нужную информацию одной модели для обучения гибкого ансамбля. Создается в <strong>ensemble_builder</strong>. </p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>model_name</strong>(str) – название текущей модели. Используется для сохранения и логгирования.</li>
+<li><strong>pinn</strong>(PINN) – экземпляр PINN для текущей модели. Должен содержать информацию о генераторах и геометрии. </li>
+<li><strong>optimizer</strong>(torch.optim.Optimizer) - оптимизатор для модели, например torch.optim.Adam.</li>
+<li><strong>scheduler</strong>(torch.optim.lr_scheduler.LRScheduler) – scheduler для модели, например.</li>
+</ul>
+<p><strong>Методы</strong></p>
+<pre><code>get_parameters -&gt; Tuple[str, PINN, Optimizer, LRScheduler]
+</code></pre>
+<p>Возвращает сохраненные параметры для модели. </p>
+<h2 id="ensembletrainer">EnsembleTrainer</h2>
+<pre><code>CLASS neural_network.ensemble.EnsembleTrainer(ensemble_config: List[EnsembleInstance], output_dim: int, **kwargs)
+</code></pre>
+<p>Модификация класса <a href="../trainer/">Trainer</a> для обучения гибкого ансамбля. </p>
+<p><strong>Параметры</strong>
+- <strong>ensemble_config</strong>(List[<a href="#ensembleinstance">EnsembleInstance</a>]) - информация для ансабля полученная с помощью <a href="#ensemble_builder">ensemble_builder</a>. 
+- <strong>output_dim</strong>(int) - размер выхода ансамбля. 
+- <strong>**kwargs</strong> – аргументы <a href="../trainer/">Trainer</a>.</p>
+<p><strong>Методы</strong></p>
+<pre><code>train -&gt; None
+</code></pre>
+<p>Обучает ансамбль. </p>
+<h2 id="ensemble_builder">ensemble_builder</h2>
+<pre><code>FUNCTION neural_network.ensemble.ensemble_builder
+</code></pre>
+<p>Вспомогательная функция для сборки <a href="#ensembleinstance">EnsembleInstance</a></p>
+<p><strong>Параметры</strong>
+- <strong>models</strong>(List[torch.nn.Module]) - список моделей для ансамблирования.
+- <strong>generatorss_domain</strong>(List[BaseGenerator]) - список генераторов (<em>в области</em>) для каждой модели.
+- <strong>generators_bound</strong>(List[BaseGenerator]) - список генераторов (<em>на границе</em>) для каждой модели.
+- <strong>condition_idx</strong>(List[int]) - список индексов условий.
+- <strong>optimizers</strong>(List[Optimizer]) - список оптимизаторов
+- <strong>schedulers</strong>(List[LRScheduler]) - список scheduler'ов.
+- <strong>conditions</strong>(List[Condition]) - список условий. </p>
 
 
 
