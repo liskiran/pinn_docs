@@ -35,7 +35,7 @@
 ## EnsembleInstance
     CLASS neural_network.ensemble.EnsembleInstance(model_name: str, pinn: PINN, optimizer: torch.optim.Optimizer, scheduler: torch.optim.LRScheduler)
 
-Класс, хранящий нужную информацию одной модели для обучения гибкого ансамбля. Создается в **ensemble_builder**. 
+Класс, хранящий нужную информацию одной модели для обучения гибкого ансамбля. Создается в [ensemble_builder](#ensemble_builder). 
 
 **Параметры**
 
