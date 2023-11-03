@@ -65,7 +65,7 @@
 
 **Методы**
 - **__call__(self, trainer: Trainer))** : Вызов колбэка при обучении модели.
-- 
+
 ## HeatmapPrediction
 
     CLASS callbacks.heatmap.HeatmapPrediction(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html')
@@ -81,7 +81,6 @@
 
 **Методы**
 - **__call__(self, trainer: Trainer))** : Вызов колбэка при обучении модели.
-- 
 ## PlotHeatmapSolution
 
     CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
@@ -97,12 +96,123 @@
 - **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
 
 ## BasicCurve
+    CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True)
+Абстрактный класс для наследования другими классами тепловых карт.
+**Параметры**
+
+- **save_dir** (str) – директория для сохранения графика,
+- **period** (int) – период сохранения графиков,
+- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
+- **log_scale**(bool) — флаг, определяющий будет ли ось OY логарифмирована.
+
+**Методы**
+
+- **draw(self, values: Sequence, v_names: [str], coord: np.ndarray, plot_title: str, file_name: str = None)** : Строит и сохраняет кривую.
+- **dict_data(fig)** : Сохраняет данные графика в виде словаря.
+- **init_curve_names(self, conditions)** : Нзначает названия кривым в зависимости от conditions.
+
 ## GridResidualCurve
+    CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True)
+Коллбэк для построения кривых обучения при помощи сетки.
+
+**Параметры**
+
+- **save_dir** (str) – директория для сохранения графика,
+- **grid**(Grid) — Объект класса Grid,
+- **period** (int) – период сохранения графиков,
+- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
+- **log_scale** — флаг, определяющий будет ли ось OY логарифмирована.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
+
 ## TrainingCurve
+    CLASS callbacks.curve.TrainingCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
+Коллбэк для построения кривых обучения по лоссам модели.
+
+**Параметры**
+
+- **save_dir** (str) – директория для сохранения графика,
+- **period** (int) – период сохранения графиков,
+- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
+- **log_scale** — флаг, определяющий будет ли ось OY логарифмирована.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
 ## LearningRateCurve
+    CLASS callbacks.curve.LearningRateCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
+Коллбэк для построения кривой learning rate.
+
+**Параметры**
+
+- **save_dir** (str) – директория для сохранения графика,
+- **period** (int) – период сохранения графиков,
+- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
+- **log_scale** — флаг, определяющий будет ли ось OY логарифмирована.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
 ## ErrorCurve
+    CLASS callbacks.curve.ErrorCurve(self, save_dir: str, solution: Callable[[torch.Tensor], torch.Tensor], period=100, save_mode='html',
+                 log_scale: bool = True)
+Коллбэк для построения кривой ошибки.
+
+**Параметры**
+
+- **save_dir** (str) – директория для сохранения графика,
+- **solution** (Callable) — функция точного решения,
+- **period** (int) – период сохранения графиков,
+- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
+- **log_scale** — флаг, определяющий будет ли ось OY логарифмирована.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
 ## ProgressBar
+    CLASS callbacks.progress.ProgressBar(self, template: str, period: int = 10)
+Коллбэк для обновления Progress Bar.
+
+**Параметры**
+
+- **template** (str) – шаблон строки, выводимой в консоль,
+- **period** (int) — периодичность вызова коллбэка.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
+- **make_message(self, trainer: Trainer) -> str** : Создание строки, выводимой в консоль.
 ## TqdmBar
+    CLASS callbacks.progress.TqdmBar(self, template: str, period: int = 10)
+Коллбэк для обновления Tqdm progress bar.
+
+**Параметры**
+
+- **template** (str) – шаблон строки, выводимой в консоль,
+- **period** (int) — периодичность вызова коллбэка.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
 ## SaveModel
-## CallbackOrganizer
+    CLASS callbacks.save.SaveModel(self, save_path: str, period: int = 1000)
+Коллбэк для сохранения модели.
+
+**Параметры**
+
+- **save_path** (str) – путь для сохранения файла(включая название),
+- **period** (int) — периодичность вызова коллбэка.
+
+**Методы**
+
+- **__call__(self, trainer: Trainer) -> None** : Вызов колбэка при обучении модели.
+## CallbacksOrganizer
+    CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback])
+Класс для сортировки коллбэков.
+
+**Параметры**
+
+- **callbacks** (List[BaseCallback]) – список коллбэков.
 
