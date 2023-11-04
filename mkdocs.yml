@@ -6,6 +6,7 @@ nav:
   - Главная: "index.md"
   - Руководство:
     - Начало работы: "guide/getting_started.md"
+    - Ансамблирование: "guide/ensemble.ipynb"
   - API:
     - PINN: "api/PINN.md"
     - Neural Network: "api/neural_network.md"
@@ -19,3 +20,6 @@ nav:
 
 theme:
   name: material
+
+plugins:
+    - mkdocs-jupyter
