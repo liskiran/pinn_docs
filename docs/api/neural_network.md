@@ -1,3 +1,6 @@
+#Нейронные сети
+
+
 ## Feed forward neural network
     CLASS: src.neural_network.FNN(layers_all: List[int])
 
@@ -12,10 +15,12 @@
 
 **Методы**
 
-    
     forward(x: torch.Tensor)
 
-Выполняет forward-pass модели. 
+**Параметры**
+        x (torch.Tensor) - входной тензор данных для прямого прохода модели
+
+Выполняет прямой проход обучения модели. 
 
 
 **Пример**
@@ -24,7 +29,7 @@
     model = FNN(layers_all=[2, 128, 128, 128, 1])
 
 
-## XavierFNN
+## Xavier feed forward neural network
     CLASS: src.neural_network.XavierFNN (layers_all: List[int], init_mode: str)
 
 Модель включает в себя полноценный класс XavierFNN, в котором задается количество нейронов и метод инициализации весов ксавьера. Архитектура сети включает линейные слои, которые связаны между собой функциями активации Siren и GeLU [source функц актив].
