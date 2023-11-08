@@ -19,14 +19,19 @@
 
 Построение сетки с указанными верхней и нижней границами и количеством точек по осям:
 ```python
+from src.callbacks.heatmap import Grid
 grid = Grid(low=[0, 0], high=[1, 1], n_points=[100, 100])
 ```
 Построение сетки с указанными верхней и нижней границами и общим количеством точек:
 ```python
+from src.callbacks.heatmap import Grid
 grid = Grid(low=[0, 0], high=[1, 1], n_points=10001)
 ```
 Построение сетки на основе экземпляра класса PINN и указанного количества точек:
 ```python
+from src.callbacks.heatmap import Grid
+from src.problems import problem_2D1C_heat_equation
+
 conditions, input_dim, output_dim = problem_2D1C_heat_equation()
 model = FNN(layers_all=[input_dim, 128, 128, 128, output_dim])
 pinn = PINN(model=model, conditions=conditions)
@@ -34,6 +39,9 @@ grid = Grid.from_pinn(pinn, 80001)
 ```
 Построение сетки на основе условий задачи и указанного количества точек:
 ```python
+from src.callbacks.heatmap import Grid
+from src.problems import problem_2D1C_heat_equation
+
 conditions, input_dim, output_dim = problem_2D1C_heat_equation()
 grid = Grid.from_condition(conditions, 10001)
 ```
@@ -95,6 +103,17 @@ grid = Grid.from_condition(conditions, 10001)
 
 - **__call__(self, trainer: Trainer))** : Использование функции обратного вызова(callback) при обучении модели.
 
+**Пример использования**
+```python
+from src.callbacks.heatmap import HeatmapError
+
+def exact_solution(args, a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
+    return torch.exp(-gamma ** 2 * args[:, 1]) * (a * torch.cos(alpha * args[:, 0]) + b * torch.sin(beta * args[:, 0]))
+grid = Grid.from_pinn(pinn, 80001)
+save_dir = "reports"
+callbacks = [HeatmapError(save_dir, grid=grid, solution=exact_solution, period=500, save_mode='html')]
+```
+
 ## HeatmapPrediction
 
     CLASS callbacks.heatmap.HeatmapPrediction(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html')
@@ -111,6 +130,15 @@ grid = Grid.from_condition(conditions, 10001)
 **Методы**
 
 - **__call__(self, trainer: Trainer))** : Использование функции обратного вызова(callback) при обучении модели.
+
+**Пример использования**
+```python
+from src.callbacks.heatmap import HeatmapPrediction
+
+grid = Grid.from_pinn(pinn, 80001)
+save_dir = "reports"
+callbacks = [HeatmapPrediction(save_dir, grid=grid, period=500, save_mode='png')]
+```
 ## PlotHeatmapSolution
 
     CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
@@ -124,6 +152,17 @@ grid = Grid.from_condition(conditions, 10001)
 - **grid** (str) – объект класса Grid,
 - **solution** — функция точного решения,
 - **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
+
+**Пример использования**
+```python
+from src.callbacks.heatmap import PlotHeatmapSolution
+
+def exact_solution(args, a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
+    return torch.exp(-gamma ** 2 * args[:, 1]) * (a * torch.cos(alpha * args[:, 0]) + b * torch.sin(beta * args[:, 0]))
+grid = Grid.from_pinn(pinn, 80001)
+save_dir = "reports"
+PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='show')
+```
 
 ## BasicCurve
     CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True)
