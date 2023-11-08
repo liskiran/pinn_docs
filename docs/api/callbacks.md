@@ -112,6 +112,15 @@ def exact_solution(args, a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
 grid = Grid.from_pinn(pinn, 80001)
 save_dir = "reports"
 callbacks = [HeatmapError(save_dir, grid=grid, solution=exact_solution, period=500, save_mode='html')]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
 ```
 
 ## HeatmapPrediction
@@ -138,6 +147,15 @@ from src.callbacks.heatmap import HeatmapPrediction
 grid = Grid.from_pinn(pinn, 80001)
 save_dir = "reports"
 callbacks = [HeatmapPrediction(save_dir, grid=grid, period=500, save_mode='png')]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
 ```
 ## PlotHeatmapSolution
 
@@ -195,6 +213,24 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- 
+**Пример использования**
+```python
+from src.callbacks.curve import GridResidualCurve
+
+grid = Grid.from_pinn(pinn, 80001)
+save_dir = "reports"
+callbacks = [GridResidualCurve(save_dir, grid=grid, period=100, save_mode='html')]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
 
 ## TrainingCurve
     CLASS callbacks.curve.TrainingCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
@@ -210,6 +246,22 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+```python
+from src.callbacks.curve import TrainingCurve
+
+save_dir = "reports"
+callbacks = [TrainingCurve(save_dir, period=100, save_mode='png')]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
+
 ## LearningRateCurve
     CLASS callbacks.curve.LearningRateCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
 Функция обратного вызова(callback) для построения кривой learning rate.
@@ -224,6 +276,23 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+
+```python
+from src.callbacks.curve import LearningRateCurve
+
+save_dir = "reports"
+callbacks = [LearningRateCurve(save_dir, period=500, log_scale=False, save_mode='html')]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
+
 ## ErrorCurve
     CLASS callbacks.curve.ErrorCurve(self, save_dir: str, solution: Callable[[torch.Tensor], torch.Tensor], period=100, save_mode='html',
                  log_scale: bool = True)
@@ -240,6 +309,23 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+
+```python
+from src.callbacks.curve import ErrorCurve
+
+save_dir = "reports"
+callbacks = [ErrorCurve(save_dir, solution=exact_solution, period=100)]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
+
 ## ProgressBar
     CLASS callbacks.progress.ProgressBar(self, template: str, period: int = 10)
 Функция обратного вызова(callback) для обновления Progress Bar.
@@ -265,6 +351,21 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+
+```python
+from src.callbacks.progress import TqdmBar
+
+callbacks = [TqdmBar('Epoch {epoch} lr={lr:.2e} Loss={loss_eq} Total={total_loss:.2e}')]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
 ## SaveModel
     CLASS callbacks.save.SaveModel(self, save_path: str, period: int = 1000)
 Функция обратного вызова(callback) для сохранения модели.
@@ -277,6 +378,21 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+```python
+from src.callbacks.save import SaveModel
+
+save_dir = "reports"
+callbacks = [SaveModel(save_dir + "/model.pth")]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
 ## CallbacksOrganizer
     CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback])
 Класс для сортировки функций обратного вызова(callback).
