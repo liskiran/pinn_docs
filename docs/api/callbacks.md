@@ -14,6 +14,28 @@
 - **from_pinn(cls, pinn: PINN, n_points: Union[Sequence[int], int])** : Создает объект Grid на основе PINN и указанного количества точек pinn
 - **from_condition(cls, condition, n_points: Union[Sequence[int], int])** : Создает объект Grid на основе условий задачи и указанного количества точек.
 - **smart_volume(low, high, total_points: int) -> Sequence[int]** : Статический метод для расчета количества точек по каждой оси на основе указанного числа точек.
+
+**Примеры использования**
+
+Построение сетки с указанными верхней и нижней границами и количеством точек по осям:
+
+    grid = Grid(low=[0, 0], high=[1, 1], n_points=[100, 100])
+Построение сетки с указанными верхней и нижней границами и общим количеством точек:
+
+    grid = Grid(low=[0, 0], high=[1, 1], n_points=10001)
+Построение сетки на основе экземпляра класса PINN и указанного количества точек:
+
+    conditions, input_dim, output_dim = problem_2D1C_heat_equation()
+    model = FNN(layers_all=[input_dim, 128, 128, 128, output_dim])
+    pinn = PINN(model=model, conditions=conditions)
+    grid = Grid.from_pinn(pinn, 80001)
+Построение сетки на основе условий задачи и указанного количества точек:
+
+    conditions, input_dim, output_dim = problem_2D1C_heat_equation()
+    grid = Grid.from_condition(conditions, 10001)
+
+
+
   
 
 ## BaseSave
