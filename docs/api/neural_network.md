@@ -1,5 +1,12 @@
 # Нейронные сети
 
+В бибилотеки реализованы различные архитектуры нейронных сетей:
+- Feed forward neural network
+- Xavier feed forward neural network
+- Residual neural network
+- Densely connected linear networks 
+
+Помимо архитектур было реализовано [ансамблирование](#ensembletrainer) моделей, при котором существует возможность использование всех моделей разом. Более того в архитектурах моделей используются адаптивная функция активации [Siren](#siren) и оптимизированная функция [GeLU](#gelu).
 
 ## Feed forward neural network
     CLASS: src.neural_network.FNN(layers_all: List[int])
@@ -199,7 +206,7 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 
 ```
 
-## Densely Connected Convolutional Networks 
+## Densely connected linear networks 
     CLASS: src.neural_network.DenseNet(layers_all: List[int], blocks: List[int])
 
 Архитектура модели включает в себя классы DenseNet и DenseBlock. В DenseNet задается количество линейных блоков и нейронов для каждого блока соответственно. Во время обучения происходит передача данных с каждого слоя на каждый, благодаря чему нейронная сеть получает больше информации о задаче.
