@@ -199,6 +199,13 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 
 ```
 
+## DenseNet 
+    CLASS: src.neural_network.DenseNet(layers_all: List[int], blocks: List[int], res_block: nn.Module, activation_function_array: List[nn.Module])
+
+Архитектура модели включает в себя классы DenseNet и LightResidualBlock. В DenseNet задается количество линейных блоков и нейронов для каждого блока соответственно, более того при задании класса требуется передать вид линейного блока (LightResidualBlock) и функции активации, которые будут соединять линейные слои в блоках. Во время обучения происходит передача данных с каждого слоя на каждый, благодаря чему нейронная сеть получает больше информации о задаче.
+
+
+
 ## GELU
     CLASS: src.neural_network.activation_function.GELU(nn.Module)
 
@@ -206,15 +213,28 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 
 **Методы**
     forward(input: torch.Tensor)
+
+**Параметры**
+    input (torch.Tensor) - входной тензор данных для прямого прохода функции
     
-
-Расчитывает функцию с оптимизацией torch.jit.script.
-
+Выполняет прямой проход функции активации во время обучения модели с оптимизацией torch.jit.script.
 
 **Пример**
 
    gelu = GELU()
 
+**Примеры использования:**
+
+```python
+from src.neural_network.activation_function import GeLU
+
+# Определение функции активации
+gelu = GeLU()
+
+# Выполнение прямого прохода 
+output = gelu(input_tensor)
+
+```
 
 ## Sine
     CLASS: src.neural_network.activation_function.Sine(nn.Module)
@@ -224,39 +244,25 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 **Методы**
     forward(input: torch.Tensor)
 
-Расчитывает функцию синуса с оптимизацией torch.jit.script.
+**Параметры**
+    input (torch.Tensor) - входной тензор данных для прямого прохода функции
+    
+Выполняет прямой проход адаптивной функции синуса во время обучения модели с оптимизацией torch.jit.script.
+
 
 **Пример**
 
    sine = Sine()
    
+**Примеры использования:**
 
-## DenseNet 
-    CLASS: src.neural_network.DenseNet(layers_all: List[int], blocks: List[int], res_block: nn.Module, activation_function_array: List[nn.Module])
+```python
+from src.neural_network.activation_function import Sine
 
-Архитектура модели включает в себя классы DenseNet и LightResidualBlock. В DenseNet задается количество линейных блоков и нейронов для каждого блока соответственно, более того при задании класса требуется передать вид линейного блока (LightResidualBlock) и функции активации, которые будут соединять линейные слои в блоках. Во время обучения происходит передача данных с каждого слоя на каждый, благодаря чему нейронная сеть получает больше информации о задаче.
+# Определение функции активации
+sine = Sine()
 
-**Параметры**
+# Выполнение прямого прохода 
+output = sine(input_tensor)
 
-- **layers_all**(List) – список, содержащий количества нейроннов для каждого блока слоев Resnet.
-> **_Важно:_**  первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.
-- **blocks**(List) – список, содержащий количество блоков для каждого количества нейронновю
-> **_Важно:_**  При подаче None для каждого слоя будет использовать один блок.
-- **res_block**(nn.Module) -бБлок ResNet, реализованный на базе ResidualBlockю
-- **activation_function_array**(List) – список, содержащий функции активации, которые используются при обучении.
-
-**Методы**
-
-    forward(x: torch.Tensor)
-
-Выполняет forward-pass модели. 
-
-    __make_layers(res_block: nn.Module,count_blocks: int,in_features: int,out_features: int,activation: nn.Module, is_not_last: bool):
-
-Конструирует блоки ResidualBlock одного размера и последующий линейнный слой новой размерности.
-
-
-**Пример**
-
-    model = DenseNet(layers_all=[ 2, 5, 10, 15, 20, 25, 1], blocks = [1, 6, 5, 6, 2])
-
+```
