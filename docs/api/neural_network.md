@@ -105,7 +105,7 @@ output = model(input_tensor)
 
 - **layers_all**(List) – список, содержащий количества нейроннов для каждого блока слоев Resnet.
 > **_Важно:_**  первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.
-- **blocks**(List) – список, содержащий количество блоков для каждого количества нейронновю
+- **blocks**(List) – список, содержащий количество блоков для каждого количества нейроннов
 > **_Важно:_**  При подаче None для каждого слоя будет использовать один блок.
 - **res_block**(nn.Module) - блок ResNet, реализованный на базе ResidualBlock.
 - **activation_function_array**(List) – список, содержащий функции активации, которые используются при обучении.
@@ -160,7 +160,7 @@ output = model(input_tensor)
 
 ```
 
-## LightResidualBlock
+## Residual block
       CLASS: src.neural_network. LightResidualBlock (activation: nn.Module, features: int)
 
 Архитектура блока в Residual neural network. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков
@@ -199,12 +199,42 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 
 ```
 
-## DenseNet 
-    CLASS: src.neural_network.DenseNet(layers_all: List[int], blocks: List[int], res_block: nn.Module, activation_function_array: List[nn.Module])
+## Densely Connected Convolutional Networks 
+    CLASS: src.neural_network.DenseNet(layers_all: List[int], blocks: List[int])
 
-Архитектура модели включает в себя классы DenseNet и LightResidualBlock. В DenseNet задается количество линейных блоков и нейронов для каждого блока соответственно, более того при задании класса требуется передать вид линейного блока (LightResidualBlock) и функции активации, которые будут соединять линейные слои в блоках. Во время обучения происходит передача данных с каждого слоя на каждый, благодаря чему нейронная сеть получает больше информации о задаче.
+Архитектура модели включает в себя классы DenseNet и DenseBlock. В DenseNet задается количество линейных блоков и нейронов для каждого блока соответственно. Во время обучения происходит передача данных с каждого слоя на каждый, благодаря чему нейронная сеть получает больше информации о задаче.
 
+**Параметры**
 
+- **layers_all** (List) - список нейронов по слоям для обучения.
+> **_Важно:_**  Первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.
+- **blocks**(List) – список, содержащий количество блоков (DenseBlock) для каждого количества нейроннов
+
+**Методы**
+
+    forward(x: torch.Tensor)
+
+**Параметры**
+
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели
+
+Выполняет прямой проход обучения блока модели DenseNet.
+
+## Densely block
+    CLASS: src.neural_network.DenseBlock(activation: nn.Module , dimension_layer: int, features: int)
+
+**Параметры**
+
+- **activation** (nn.Module) - функция активации
+- **dimension_layer**(int) – количество блоков (Densely block) 
+- **features**(int) - размерность входных и выходных данных данных.
+
+**Методы**
+
+    forward(self, x: torch.Tensor)
+    
+**Параметры**
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели
 
 ## GELU
     CLASS: src.neural_network.activation_function.GELU(nn.Module)
