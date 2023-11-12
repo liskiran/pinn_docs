@@ -16,6 +16,8 @@ nav:
     - Generation: "api/generation.md"
     - Geometry: "api/geometry.md"
     - Trainer: "api/trainer.md"
+    - Regularization: "api/regularization.md"
+    - Mesh: "api/mesh.md"
   - Как писать документацию: "how_to_use.md"
 
 theme:
