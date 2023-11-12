@@ -64,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -104,43 +109,6 @@
     </div>
     
     
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
     
     
   </nav>
@@ -254,6 +222,26 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ensemble/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ансамблирование моделей
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -331,6 +319,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -341,6 +342,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feed-forward-neural-network" class="md-nav__link">
+    Feed forward neural network
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xavier-feed-forward-neural-network" class="md-nav__link">
+    Xavier feed forward neural network
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-neural-network" class="md-nav__link">
+    Residual neural network
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-block" class="md-nav__link">
+    Residual block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#densely-connected-linear-networks" class="md-nav__link">
+    Densely connected linear networks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#densely-block" class="md-nav__link">
+    Densely block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gelu" class="md-nav__link">
+    GELU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sine" class="md-nav__link">
+    Sine
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -467,6 +543,46 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regularization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regularization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mesh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mesh
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -510,6 +626,72 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feed-forward-neural-network" class="md-nav__link">
+    Feed forward neural network
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xavier-feed-forward-neural-network" class="md-nav__link">
+    Xavier feed forward neural network
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-neural-network" class="md-nav__link">
+    Residual neural network
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-block" class="md-nav__link">
+    Residual block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#densely-connected-linear-networks" class="md-nav__link">
+    Densely connected linear networks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#densely-block" class="md-nav__link">
+    Densely block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gelu" class="md-nav__link">
+    GELU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sine" class="md-nav__link">
+    Sine
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -524,9 +706,245 @@
                   
 
 
-  <h1>Neural Network</h1>
+<h1 id="_1">Нейронные сети</h1>
+<p>В бибилотеке реализованы различные архитектуры нейронных сетей:
+- Feed forward neural network
+- Xavier feed forward neural network
+- Residual neural network
+- Densely connected linear networks </p>
+<p>Помимо архитектур было реализовано <a href="https://github.com/liskiran/pinn_docs/blob/main/docs/api/ensemble.md">ансамблирование</a> моделей, при котором существует возможность использование всех моделей разом для улучшения предсказаний. Более того в архитектурах моделей используются адаптивная функция активации <a href="#siren">Siren</a> и оптимизированная функция <a href="#gelu">GeLU</a> для оптимизации процесса обучения.</p>
+<h2 id="feed-forward-neural-network">Feed forward neural network</h2>
+<pre><code>CLASS: src.neural_network.FNN(layers_all: List[int])
+</code></pre>
+<p>Модель включает в себя целостный класс FNN, где задается количество нейронов. Архитектура FNN включает линейные слои, которые связаны между собой адаптивной функцией активации <a href="#siren">Siren</a> и функциями <a href="#gelu">GeLU</a>.</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>layers_all</strong> (List) - список нейронов по слоям для обучения.</li>
+</ul>
+<blockquote>
+<p><strong><em>Важно:</em></strong>  Первое и последнее значение массива нейронов должно соответствовать геометрии задачи и количеству выводов.</p>
+</blockquote>
+<p><strong>Метод</strong></p>
+<pre><code>forward(x: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
+</code></pre>
+<p>Выполняет прямой проход обучения модели. </p>
+<p><strong>Пример использования:</strong></p>
+<pre><code class="language-python">from src.neural_network import FNN
+
+# Определение входных и выходных нейронов 
+input_size = 2
+
+output_size = 1
+
+# Определение слоев нейронов в модели
+layers = [input_size, 128, 128, 128, output_size]
 
 
+# Определение модели
+model = FNN(layers_all=layers)
+
+
+output = model(input_tensor)
+
+</code></pre>
+<h2 id="xavier-feed-forward-neural-network">Xavier feed forward neural network</h2>
+<pre><code>CLASS: src.neural_network.XavierFNN (layers_all: List[int], init_mode: str)
+</code></pre>
+<p>Модель включает в себя полноценный класс XavierFNN, в котором задается количество нейронов и метод инициализации весов Ксавьера. Архитектура сети включает линейные слои, которые связаны между собой функциями активации <a href="#sine">Siren</a> и <a href="#gelu">GeLU</a>. Освноная особенность данной архитектуры заключается в возможности инициализации весов для обучения модели.</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>layers_all</strong> (List) - список нейронов по слоям для обучения.</li>
+<li><strong>init_mode</strong> (str) - метод инициализации весов ‘norm’/’uniform’.</li>
+</ul>
+<p><strong>Метод</strong></p>
+<pre><code>forward(input: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>input (torch.Tensor) - входной тензор данных для прямого прохода модели.
+</code></pre>
+<p>Выполняет прямой проход обучения модели. </p>
+<p><strong>Примеры использования:</strong></p>
+<pre><code class="language-python">from src.neural_network import XavierFNN
+
+# Определение входных и выходных нейронов 
+input_size = 2
+
+output_size = 1
+
+# Определение слоев нейронов в модели и  метода инициализации весов
+layers = [input_size, 128, 128, 128, output_size]
+mode= 'norm'
+
+# Определение модели
+model = XavierFNN (layers_all=layers, mode=mode)
+
+output = model(input_tensor)
+
+</code></pre>
+<h2 id="residual-neural-network">Residual neural network</h2>
+<pre><code>CLASS: src.neural_network.ResNet(layers_all: List[int], blocks: List[int], res_block: nn.Module, activation_function_array: List[nn.Module])
+</code></pre>
+<p>Модель включает в себя классы ResNet и LightResidualBlock. В самой модели задается количество линейных блоков и нейронов для каждого блока соответственно, более того при задании класса требуется передать вид линейного блока (LightResidualBlock) и функции активации, которые будут соединять линейные слои в блоках. Во время обучения происходит передача данных обучения между нейронами, при котором пропускается часть слоев через блоки линейных слоев, что дает большой клад в обучения и устойчивость модели. 
+<img alt="ResNet" src="https://github.com/liskiran/pinn_docs/blob/main/docs/resnet.jpg" />
+<strong>Параметры</strong></p>
+<ul>
+<li><strong>layers_all</strong>(List) – список, содержащий количества нейроннов для каждого блока слоев Resnet.<blockquote>
+<p><strong><em>Важно:</em></strong>  Первое и последнее значение массива нейронов должно соответствовать геометрии задачи и количеству выводов.</p>
+</blockquote>
+</li>
+<li><strong>blocks</strong>(List) – список, содержащий количество блоков для каждого количества нейроннов<blockquote>
+<p><strong><em>Важно:</em></strong>  При подаче None для каждого слоя будет использовать один блок.</p>
+</blockquote>
+</li>
+<li><strong>res_block</strong>(nn.Module) - блок ResNet, реализованный на базе ResidualBlock.</li>
+<li><strong>activation_function_array</strong>(List) – список, содержащий функции активации, которые используются при обучении.</li>
+</ul>
+<p><strong>Методы</strong></p>
+<pre><code>forward(x: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
+</code></pre>
+<p>Выполняет прямой проход обучения модели. </p>
+<pre><code>__make_layers(res_block: nn.Module,count_blocks: int,in_features: int,out_features: int,activation: nn.Module, is_not_last: bool):
+</code></pre>
+<p><strong>Параметры</strong>
+   - res_block (nn.Module) - блок Residual neural network, реализованный на базе ResidualBlock.
+   - count_blocks (int) - колличество блоков модели.
+   - in_features (int) - колличество входных нейронов в слой блока.
+   - out_features (int) - колличество выходных нейронов в слой блока.
+   - activation (nn.Module) - функция активации, соеденяющаяя линейнные слои.
+   - is_not_last (bool) - ограничение, показывающее, что следующего блока ResNet нет.</p>
+<p>Конструирует блоки ResidualBlock одного размера и последующий линейнный слой новой размерности.</p>
+<p><strong>Примеры использования:</strong></p>
+<pre><code class="language-python">from src.neural_network import ResNet
+
+# Определение входных и выходных нейронов 
+input_size = 2
+
+output_size = 1
+
+# Определение слоев нейронов в модели
+layers = [input_size, 5, 10, 15, 20, 25, output_size]
+
+# Определение слоев нейронов в модели
+blocks = [1, 6, 5, 6, 2]
+
+
+# Определение модели
+model = ResNet(layers_all=layers, blocks = blocks)
+
+# Выполнение прямого прохода модели
+output = model(input_tensor)
+
+</code></pre>
+<h2 id="residual-block">Residual block</h2>
+<pre><code>  CLASS: src.neural_network. LightResidualBlock (activation: nn.Module, features: int)
+</code></pre>
+<p>Архитектура блока в модели Residual neural network. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков.В блоке создается как минимум два одинаковых линейнных слоя, соеденные функцией активации.</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>features</strong>(int) – Размерность входных данных.</li>
+<li><strong>activation</strong>(nn.Module) – функция активации.</li>
+</ul>
+<p><strong>Метод</strong></p>
+<pre><code>forward(x: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>x (torch.Tensor) – входной тензор данных для прямого прохода модели.
+</code></pre>
+<p>Выполняет прямой проход обучения блока модели ResNet.</p>
+<p><strong>Пример</strong></p>
+<p>layer = LightResidualBlock(nn.GeLU(), 64)</p>
+<p><strong>Примеры использования:</strong></p>
+<pre><code class="language-python">from src.neural_network import LightResidualBlock
+from src.neural_network.activation_function import GeLU
+
+input_neuron = 64
+
+# Определение функции активации и блока модели 
+gelu = GeLU()
+
+layer = LightResidualBlock(features = input_neuron, activation = gelu)
+
+</code></pre>
+<h2 id="densely-connected-linear-networks">Densely connected linear networks</h2>
+<pre><code>CLASS: src.neural_network.DenseNet(layers_all: List[int], blocks: List[int])
+</code></pre>
+<p>Архитектура модели включает в себя классы DenseNet и DenseBlock. В архитектуре задается количество линейных блоков и нейронов для каждого блока соответственно. Во время обучения происходит передача данных с каждого слоя на каждый, благодаря чему нейронная сеть получает больше информации о задаче.</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>layers_all</strong> (List) - список нейронов по слоям для обучения.<blockquote>
+<p><strong><em>Важно:</em></strong>  Первое и последнее значение массива нейронов должно соответствовать геометрии задачи и количеству выводов.</p>
+</blockquote>
+</li>
+<li><strong>blocks</strong>(List) – список, содержащий количество блоков (DenseBlock) для каждого количества нейроннов.</li>
+</ul>
+<p><strong>Метод</strong></p>
+<pre><code>forward(x: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
+</code></pre>
+<p>Выполняет прямой проход обучения блока модели DenseNet.</p>
+<h2 id="densely-block">Densely block</h2>
+<pre><code>CLASS: src.neural_network.DenseBlock(activation: nn.Module , dimension_layer: int, features: int)
+</code></pre>
+<p>Архитектура блока в модели Densely connected linear networks, благодаря которому происходит передача данных между слоями. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков.</p>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>activation</strong> (nn.Module) - функция активации.</li>
+<li><strong>dimension_layer</strong>(int) – количество блоков (Densely block).</li>
+<li><strong>features</strong>(int) - размерность входных и выходных данных данных.</li>
+</ul>
+<p><strong>Метод</strong></p>
+<pre><code>forward(self, x: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong>
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.</p>
+<h2 id="gelu">GELU</h2>
+<pre><code>CLASS: src.neural_network.activation_function.GELU(nn.Module)
+</code></pre>
+<p>Функция активации GeLU с ускорением расчетов в процессе обучения.</p>
+<p><strong>Метод</strong></p>
+<pre><code>forward(input: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>input (torch.Tensor) - входной тензор данных для прямого прохода функции.
+</code></pre>
+<p>Выполняет прямой проход функции активации во время обучения модели с оптимизацией torch.jit.script.</p>
+<p><strong>Пример использования:</strong></p>
+<pre><code class="language-python">from src.neural_network.activation_function import GeLU
+
+# Определение функции активации
+gelu = GeLU()
+
+output = gelu(input_tensor)
+
+</code></pre>
+<h2 id="sine">Sine</h2>
+<pre><code>CLASS: src.neural_network.activation_function.Sine(nn.Module)
+</code></pre>
+<p>Адаптиваня функция активации Siren с ускорением расчетов в процессе обучения.</p>
+<p><strong>Метод</strong></p>
+<pre><code>forward(input: torch.Tensor)
+</code></pre>
+<p><strong>Параметр</strong></p>
+<pre><code>input (torch.Tensor) - входной тензор данных для прямого прохода функции.
+</code></pre>
+<p>Выполняет прямой проход адаптивной функции синуса во время обучения модели с оптимизацией torch.jit.script.</p>
+<p><strong>Пример использования:</strong></p>
+<pre><code class="language-python">from src.neural_network.activation_function import Sine
+
+# Определение функции активации
+sine = Sine()
+
+output = sine(input_tensor)
+
+</code></pre>
 
 
 

@@ -110,43 +110,6 @@
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    
     
   </nav>
   
@@ -250,6 +213,26 @@
   
   <span class="md-ellipsis">
     Начало работы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ensemble/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ансамблирование моделей
   </span>
   
 
@@ -535,6 +518,46 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regularization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regularization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mesh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mesh
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -649,12 +672,26 @@
 <p><strong>Методы</strong></p>
 <pre><code>forward(input: torch.Tensor)
 </code></pre>
-<p>Выполняет forward-pass ансамбля. </p>
+<p>Выполняет прямой проход (forward-pass) ансамбля. </p>
+<p><strong>Примеры использования</strong></p>
+<pre><code class="language-python">from neural_network.ensemble import PretrainedEnsemble
+
+# Определение списка слоев и предобученных моделей
+layers_all = [1, 32, 1]
+pretrained_models = [model1, model2, model3]
+
+# Создание ансамбля из предобученных моделей
+ensemble = PretrainedEnsemble(layers_all, pretrained_models)
+
+# Выполнение прямого ансамбля
+output = ensemble.forward(input_tensor)
+
+</code></pre>
 <h2 id="trainableensemble">TrainableEnsemble</h2>
 <pre><code>CLASS neural_network.ensemble.TrainableEnsemble(train_model_list: List[torch.nn.Module])
 </code></pre>
 <p>Класс, позволяющий создать ансамбль из еще не обученых моделей, для обучения ансамбля с нуля. После иницализации работает как torch.nn.Module. </p>
-<p>Если вы используете этот класс, то для обучения моделей из ансамбля будут применяется один и тот же optimizer, scheduler и generator. Для обучения более гибкого ансамбля с нуля используется <a href="#ensembletrainer">EnsembleTrainer</a> и пример #TODO</p>
+<p>Если вы используете этот класс, то для обучения моделей из ансамбля будут применяется один и тот же оптимизатор и генератор. Для обучения более гибкого ансамбля с нуля используется <a href="#ensembletrainer">EnsembleTrainer</a></p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>train_model_list</strong>(List[torch.nn.Module]) – список моделей для ансамблирования.</li>
@@ -662,11 +699,24 @@
 <p><strong>Методы</strong></p>
 <pre><code>forward(input: torch.Tensor)
 </code></pre>
-<p>Выполняет forward-pass ансамбля.</p>
+<p>Выполняет прямой проход (forward-pass) ансамбля.
+<strong>Примеры использования:</strong></p>
+<pre><code class="language-python">from neural_network.ensemble import TrainableEnsemble
+
+# Определение списка моделей для ансамблирования
+models = [model1, model2, model3]
+
+# Создание ансамбля из еще не обученных моделей
+ensemble = TrainableEnsemble(models)
+
+# Выполнение прямого прохода ансамбля
+output = ensemble(input_tensor)
+
+</code></pre>
 <h2 id="ensembleinstance">EnsembleInstance</h2>
 <pre><code>CLASS neural_network.ensemble.EnsembleInstance(model_name: str, pinn: PINN, optimizer: torch.optim.Optimizer, scheduler: torch.optim.LRScheduler)
 </code></pre>
-<p>Класс, хранящий нужную информацию одной модели для обучения гибкого ансамбля. Создается в <a href="#ensemble_builder">ensemble_builder</a>. </p>
+<p>Класс EnsembleInstance используется для хранения информации об одной модели для обучения ансамбля, в котором для каждой модели задаются произвольные оптимизатор (optimizer), генераторы (generator), курс обучения (scheduler). Он создается в функции <a href="#ensemble_builder">ensemble_builder</a>. При инициализации этот класс принимает четыре аргумента:</p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>model_name</strong>(str) – название текущей модели. Используется для сохранения и логгирования.</li>
@@ -681,7 +731,7 @@
 <h2 id="ensembletrainer">EnsembleTrainer</h2>
 <pre><code>CLASS neural_network.ensemble.EnsembleTrainer(ensemble_config: List[EnsembleInstance], output_dim: int, **kwargs)
 </code></pre>
-<p>Модификация класса <a href="../trainer/">Trainer</a> для обучения гибкого ансамбля. </p>
+<p>Модификация класса <a href="../trainer/">Trainer</a> для обучения ансамбля, в котором для каждой модели задаются произвольные оптимизатор (optimizer), генераторы (generator), курс обучения (scheduler). </p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>ensemble_config</strong>(List[<a href="#ensembleinstance">EnsembleInstance</a>]) - информация для ансабля полученная с помощью <a href="#ensemble_builder">ensemble_builder</a>. </li>
@@ -692,10 +742,23 @@
 <pre><code>train -&gt; None
 </code></pre>
 <p>Обучает ансамбль. </p>
+<p><strong>Примеры использования</strong>:</p>
+<p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.</p>
+<pre><code class="language-python">callbacks_orgaziner = EnsembleCallbacksOrganizer(callbacks)
+
+trainer = EnsembleTrainer(
+    ensemble_config,
+    callbacks_organizer=callbacks_orgaziner,
+    num_epochs=1000,
+    output_dim=1,
+)
+
+trainer.train()
+</code></pre>
 <h2 id="ensemble_builder">ensemble_builder</h2>
 <pre><code>FUNCTION neural_network.ensemble.ensemble_builder
 </code></pre>
-<p>Вспомогательная функция для сборки <a href="#ensembleinstance">EnsembleInstance</a></p>
+<p>Вспомогательная функция для подготовки нескольких <a href="#ensembleinstance">EnsembleInstance</a> из списка моделей, генераторов, оптимизаторов. </p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>models</strong>(List[torch.nn.Module]) - список моделей для ансамблирования.</li>
@@ -706,6 +769,47 @@
 <li><strong>schedulers</strong>(List[LRScheduler]) - список scheduler'ов.</li>
 <li><strong>conditions</strong>(List[Condition]) - список условий. </li>
 </ul>
+<p><strong>Примеры использования:</strong></p>
+<p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.</p>
+<pre><code class="language-python">models = [
+    ResNet([input_dim, 32, 64, 64, 32, output_dim]),
+    FNN([input_dim, 128, 256, 128, output_dim]),
+    XavierFNN([input_dim, 128, 128, 128, 128, output_dim]),
+]
+
+generators_domain = [
+    UniformGeneratorRect(n_points=5000, method=&quot;uniform&quot;) for _ in range(3)
+]
+
+generators_boundary = [
+    UniformGeneratorRect(n_points=500, method=&quot;uniform&quot;) for _ in range(3)
+]
+
+optimizers = [torch.optim.Adam(model.parameters()) for model in models]
+
+schedulers = [ExponentialLR(optimizer=opt, gamma=0.999) for opt in optimizers]
+
+ensemble_config = ensemble_builder(
+    models,
+    generators_domain,
+    generators_boundary,
+    [0, 1, 2, 3],
+    optimizers,
+    schedulers,
+    conditions,
+)
+
+#Используем полученную конфигурацию для обучения:
+
+trainer = EnsembleTrainer(
+    ensemble_config,
+    callbacks_organizer=callbacks_orgaziner,
+    num_epochs=1000,
+    output_dim=output_dim,
+)
+
+trainer.train()
+</code></pre>
 
 
 
