@@ -595,46 +595,6 @@
 
               
             
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../regularization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Regularization
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mesh/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Mesh
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -815,8 +775,8 @@
   <h1>Callbacks</h1>
 
 <h2 id="grid">Grid</h2>
-<pre><code>CLASS callbacks.heatmap.Grid(low: np.array, high: np.array, n_points: Union[Sequence[int], int])
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.heatmap.Grid(low: np.array, high: np.array, n_points: Union[Sequence[int], int])
+</code></pre></div>
 <p>Класс, позволяющий создать сетку точек в указанной области. Сетку можно использовать для построения тепловых карт и расчета значения функций на структурированном наборе точек</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -831,33 +791,33 @@
 <li><strong>smart_volume(low, high, total_points: int) -&gt; Sequence[int]</strong> : Статический метод для расчета количества точек по каждой оси на основе указанного числа точек.</li>
 </ul>
 <p><strong>Примеры использования</strong></p>
-<p>Построение сетки с указанными верхней и нижней границами и количеством точек по осям:</p>
-<pre><code class="language-python">from src.callbacks.heatmap import Grid
-grid = Grid(low=[0, 0], high=[1, 1], n_points=[100, 100])
-</code></pre>
-<p>Построение сетки с указанными верхней и нижней границами и общим количеством точек:</p>
-<pre><code class="language-python">from src.callbacks.heatmap import Grid
-grid = Grid(low=[0, 0], high=[1, 1], n_points=10001)
-</code></pre>
-<p>Построение сетки на основе экземпляра класса PINN и указанного количества точек:</p>
-<pre><code class="language-python">from src.callbacks.heatmap import Grid
-from src.problems import problem_2D1C_heat_equation
-
-conditions, input_dim, output_dim = problem_2D1C_heat_equation()
-model = FNN(layers_all=[input_dim, 128, 128, 128, output_dim])
-pinn = PINN(model=model, conditions=conditions)
-grid = Grid.from_pinn(pinn, 80001)
-</code></pre>
-<p>Построение сетки на основе условий задачи и указанного количества точек:</p>
-<pre><code class="language-python">from src.callbacks.heatmap import Grid
-from src.problems import problem_2D1C_heat_equation
-
-conditions, input_dim, output_dim = problem_2D1C_heat_equation()
-grid = Grid.from_condition(conditions, 10001)
-</code></pre>
+<p>Построение сетки с указанными верхней и нижней границами и количеством точек по осям:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">Grid</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">n_points</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+</span></code></pre></div>
+Построение сетки с указанными верхней и нижней границами и общим количеством точек:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">Grid</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">10001</span><span class="p">)</span>
+</span></code></pre></div>
+Построение сетки на основе экземпляра класса PINN и указанного количества точек:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">Grid</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">src.problems</span> <span class="kn">import</span> <span class="n">problem_2D1C_heat_equation</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">conditions</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="n">problem_2D1C_heat_equation</span><span class="p">()</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">model</span> <span class="o">=</span> <span class="n">FNN</span><span class="p">(</span><span class="n">layers_all</span><span class="o">=</span><span class="p">[</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">])</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">pinn</span> <span class="o">=</span> <span class="n">PINN</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">conditions</span><span class="o">=</span><span class="n">conditions</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_pinn</span><span class="p">(</span><span class="n">pinn</span><span class="p">,</span> <span class="mi">80001</span><span class="p">)</span>
+</span></code></pre></div>
+Построение сетки на основе условий задачи и указанного количества точек:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">Grid</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">src.problems</span> <span class="kn">import</span> <span class="n">problem_2D1C_heat_equation</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">conditions</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="n">problem_2D1C_heat_equation</span><span class="p">()</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_condition</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="mi">10001</span><span class="p">)</span>
+</span></code></pre></div></p>
 <h2 id="basesave">BaseSave</h2>
-<pre><code>CLASS callbacks.heatmap.BaseSave(self, save_dir: str, period: int, save_mode: str = 'html')
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.heatmap.BaseSave(self, save_dir: str, period: int, save_mode: str = &#39;html&#39;)
+</code></pre></div>
 <p>Абстрактный класс для наследования класса BaseHeatmap</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -871,8 +831,8 @@ grid = Grid.from_condition(conditions, 10001)
 <li><strong>save_pt(self, fig, file: str)</strong> : Метод для сохранения точек графика.</li>
 </ul>
 <h2 id="baseheatmap">BaseHeatmap</h2>
-<pre><code>CLASS callbacks.heatmap.BaseHeatmap(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html'):
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.heatmap.BaseHeatmap(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = &#39;html&#39;):
+</code></pre></div>
 <p>Абстрактный класс для наследования другими классами тепловых карт.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -890,9 +850,9 @@ grid = Grid.from_condition(conditions, 10001)
 <li><strong>draw_1D(self, values: torch.Tensor, plot_name: str, file_name: str = None)</strong> : Строит одномерную тепловую карту и сохраняет ее в выбранном формате.</li>
 </ul>
 <h2 id="heatmaperror">HeatmapError</h2>
-<pre><code>CLASS callbacks.heatmap.HeatmapError(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor], period: int = 500,
-             save_mode: str = 'html')
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.heatmap.HeatmapError(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor], period: int = 500,
+             save_mode: str = &#39;html&#39;)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для создания тепловых карт ошибок во время обучения модели.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -906,27 +866,27 @@ grid = Grid.from_condition(conditions, 10001)
 <ul>
 <li><strong><strong>call</strong>(self, trainer: Trainer))</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
 </ul>
-<p><strong>Пример использования</strong></p>
-<pre><code class="language-python">from src.callbacks.heatmap import HeatmapError
-
-def exact_solution(args, a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
-    return torch.exp(-gamma ** 2 * args[:, 1]) * (a * torch.cos(alpha * args[:, 0]) + b * torch.sin(beta * args[:, 0]))
-grid = Grid.from_pinn(pinn, 80001)
-save_dir = &quot;reports&quot;
-callbacks = [HeatmapError(save_dir, grid=grid, solution=exact_solution, period=500, save_mode='html')]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
+<p><strong>Пример использования</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">HeatmapError</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">args</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">args</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">args</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_pinn</span><span class="p">(</span><span class="n">pinn</span><span class="p">,</span> <span class="mi">80001</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">HeatmapError</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">solution</span><span class="o">=</span><span class="n">exact_solution</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">save_mode</span><span class="o">=</span><span class="s1">&#39;html&#39;</span><span class="p">)]</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div></p>
 <h2 id="heatmapprediction">HeatmapPrediction</h2>
-<pre><code>CLASS callbacks.heatmap.HeatmapPrediction(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html')
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.heatmap.HeatmapPrediction(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = &#39;html&#39;)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для создания тепловых карт решения, полученного моделью.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -939,26 +899,26 @@ trainer.train()
 <ul>
 <li><strong><strong>call</strong>(self, trainer: Trainer))</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
 </ul>
-<p><strong>Пример использования</strong></p>
-<pre><code class="language-python">from src.callbacks.heatmap import HeatmapPrediction
-
-grid = Grid.from_pinn(pinn, 80001)
-save_dir = &quot;reports&quot;
-callbacks = [HeatmapPrediction(save_dir, grid=grid, period=500, save_mode='png')]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
+<p><strong>Пример использования</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">HeatmapPrediction</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_pinn</span><span class="p">(</span><span class="n">pinn</span><span class="p">,</span> <span class="mi">80001</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">HeatmapPrediction</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">save_mode</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)]</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">)</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div></p>
 <h2 id="plotheatmapsolution">PlotHeatmapSolution</h2>
-<pre><code>CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
-             save_mode: str = 'html')
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
+             save_mode: str = &#39;html&#39;)
+</code></pre></div>
 <p>Класс для построения графика точного решения. Это не функция обратного вызова(callback)!</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -967,18 +927,18 @@ trainer.train()
 <li><strong>solution</strong> — функция точного решения,</li>
 <li><strong>save_mode</strong> (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).</li>
 </ul>
-<p><strong>Пример использования</strong></p>
-<pre><code class="language-python">from src.callbacks.heatmap import PlotHeatmapSolution
-
-def exact_solution(args, a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
-    return torch.exp(-gamma ** 2 * args[:, 1]) * (a * torch.cos(alpha * args[:, 0]) + b * torch.sin(beta * args[:, 0]))
-grid = Grid.from_pinn(pinn, 80001)
-save_dir = &quot;reports&quot;
-PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='show')
-</code></pre>
+<p><strong>Пример использования</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.heatmap</span> <span class="kn">import</span> <span class="n">PlotHeatmapSolution</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">args</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">args</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">args</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_pinn</span><span class="p">(</span><span class="n">pinn</span><span class="p">,</span> <span class="mi">80001</span><span class="p">)</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">PlotHeatmapSolution</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">solution</span><span class="o">=</span><span class="n">exact_solution</span><span class="p">,</span> <span class="n">save_mode</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
+</span></code></pre></div></p>
 <h2 id="basiccurve">BasicCurve</h2>
-<pre><code>CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = &#39;html&#39;, log_scale: bool = True)
+</code></pre></div>
 <p>Абстрактный класс для наследования другими классами тепловых карт.
 <strong>Параметры</strong></p>
 <ul>
@@ -994,8 +954,8 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 <li><strong>init_curve_names(self, conditions)</strong> : Нзначает названия кривым в зависимости от conditions.</li>
 </ul>
 <h2 id="gridresidualcurve">GridResidualCurve</h2>
-<pre><code>CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode=&#39;html&#39;, log_scale: bool = True)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для построения кривых обучения при помощи сетки.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1007,25 +967,25 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 </ul>
 <p><strong>Методы</strong></p>
 <h2 id="-callself-trainer-trainer-none-callback">- <strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.</h2>
-<p><strong>Пример использования</strong></p>
-<pre><code class="language-python">from src.callbacks.curve import GridResidualCurve
-
-grid = Grid.from_pinn(pinn, 80001)
-save_dir = &quot;reports&quot;
-callbacks = [GridResidualCurve(save_dir, grid=grid, period=100, save_mode='html')]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
+<p><strong>Пример использования</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.curve</span> <span class="kn">import</span> <span class="n">GridResidualCurve</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_pinn</span><span class="p">(</span><span class="n">pinn</span><span class="p">,</span> <span class="mi">80001</span><span class="p">)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">GridResidualCurve</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">save_mode</span><span class="o">=</span><span class="s1">&#39;html&#39;</span><span class="p">)]</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="p">)</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div></p>
 <h2 id="trainingcurve">TrainingCurve</h2>
-<pre><code>CLASS callbacks.curve.TrainingCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.curve.TrainingCurve(self, save_dir: str, period=100, save_mode=&#39;html&#39;, log_scale: bool = True)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для построения кривых обучения по лоссам модели.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1036,25 +996,25 @@ trainer.train()
 </ul>
 <p><strong>Методы</strong></p>
 <ul>
-<li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
+<li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.curve</span> <span class="kn">import</span> <span class="n">TrainingCurve</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">TrainingCurve</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">save_mode</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)]</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="p">)</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div></li>
 </ul>
-<pre><code class="language-python">from src.callbacks.curve import TrainingCurve
-
-save_dir = &quot;reports&quot;
-callbacks = [TrainingCurve(save_dir, period=100, save_mode='png')]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
 <h2 id="learningratecurve">LearningRateCurve</h2>
-<pre><code>CLASS callbacks.curve.LearningRateCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.curve.LearningRateCurve(self, save_dir: str, period=100, save_mode=&#39;html&#39;, log_scale: bool = True)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для построения кривой learning rate.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1067,24 +1027,24 @@ trainer.train()
 <ul>
 <li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
 </ul>
-<pre><code class="language-python">from src.callbacks.curve import LearningRateCurve
-
-save_dir = &quot;reports&quot;
-callbacks = [LearningRateCurve(save_dir, period=500, log_scale=False, save_mode='html')]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.curve</span> <span class="kn">import</span> <span class="n">LearningRateCurve</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">LearningRateCurve</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_mode</span><span class="o">=</span><span class="s1">&#39;html&#39;</span><span class="p">)]</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="p">)</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div>
 <h2 id="errorcurve">ErrorCurve</h2>
-<pre><code>CLASS callbacks.curve.ErrorCurve(self, save_dir: str, solution: Callable[[torch.Tensor], torch.Tensor], period=100, save_mode='html',
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.curve.ErrorCurve(self, save_dir: str, solution: Callable[[torch.Tensor], torch.Tensor], period=100, save_mode=&#39;html&#39;,
              log_scale: bool = True)
-</code></pre>
+</code></pre></div>
 <p>Функция обратного вызова(callback) для построения кривой ошибки.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1098,23 +1058,23 @@ trainer.train()
 <ul>
 <li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
 </ul>
-<pre><code class="language-python">from src.callbacks.curve import ErrorCurve
-
-save_dir = &quot;reports&quot;
-callbacks = [ErrorCurve(save_dir, solution=exact_solution, period=100)]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.curve</span> <span class="kn">import</span> <span class="n">ErrorCurve</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">ErrorCurve</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">solution</span><span class="o">=</span><span class="n">exact_solution</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">100</span><span class="p">)]</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="p">)</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div>
 <h2 id="progressbar">ProgressBar</h2>
-<pre><code>CLASS callbacks.progress.ProgressBar(self, template: str, period: int = 10)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.progress.ProgressBar(self, template: str, period: int = 10)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для обновления Progress Bar.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1127,8 +1087,8 @@ trainer.train()
 <li><strong>make_message(self, trainer: Trainer) -&gt; str</strong> : Создание строки, выводимой в консоль.</li>
 </ul>
 <h2 id="tqdmbar">TqdmBar</h2>
-<pre><code>CLASS callbacks.progress.TqdmBar(self, template: str, period: int = 10)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.progress.TqdmBar(self, template: str, period: int = 10)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для обновления Tqdm progress bar.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1139,22 +1099,22 @@ trainer.train()
 <ul>
 <li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
 </ul>
-<pre><code class="language-python">from src.callbacks.progress import TqdmBar
-
-callbacks = [TqdmBar('Epoch {epoch} lr={lr:.2e} Loss={loss_eq} Total={total_loss:.2e}')]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.progress</span> <span class="kn">import</span> <span class="n">TqdmBar</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">TqdmBar</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">{epoch}</span><span class="s1"> lr=</span><span class="si">{lr:.2e}</span><span class="s1"> Loss=</span><span class="si">{loss_eq}</span><span class="s1"> Total=</span><span class="si">{total_loss:.2e}</span><span class="s1">&#39;</span><span class="p">)]</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="p">)</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div>
 <h2 id="savemodel">SaveModel</h2>
-<pre><code>CLASS callbacks.save.SaveModel(self, save_path: str, period: int = 1000)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.save.SaveModel(self, save_path: str, period: int = 1000)
+</code></pre></div>
 <p>Функция обратного вызова(callback) для сохранения модели.</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1163,25 +1123,25 @@ trainer.train()
 </ul>
 <p><strong>Методы</strong></p>
 <ul>
-<li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.</li>
+<li><strong><strong>call</strong>(self, trainer: Trainer) -&gt; None</strong> : Использование функции обратного вызова(callback) при обучении модели.
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span> <span class="nn">src.callbacks.save</span> <span class="kn">import</span> <span class="n">SaveModel</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">save_dir</span> <span class="o">=</span> <span class="s2">&quot;reports&quot;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">SaveModel</span><span class="p">(</span><span class="n">save_dir</span> <span class="o">+</span> <span class="s2">&quot;/model.pth&quot;</span><span class="p">)]</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">)</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div></li>
 </ul>
-<pre><code class="language-python">from src.callbacks.save import SaveModel
-
-save_dir = &quot;reports&quot;
-callbacks = [SaveModel(save_dir + &quot;/model.pth&quot;)]
-trainer = Trainer(
-    pinn=pinn,
-    optimizer=optimizer,
-    scheduler=scheduler,
-    num_epochs=5000,
-    update_grid_every=100,
-    callbacks=callbacks,
-)
-trainer.train()
-</code></pre>
 <h2 id="callbacksorganizer">CallbacksOrganizer</h2>
-<pre><code>CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback])
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback])
+</code></pre></div>
 <p>Класс для сортировки функций обратного вызова(callback).</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -1229,6 +1189,12 @@ trainer.train()
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

@@ -64,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_unpack" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -354,6 +359,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Problems
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -364,6 +382,39 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Параметры
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Пример:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -450,46 +501,6 @@
 
               
             
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../regularization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Regularization
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mesh/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Mesh
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -533,6 +544,30 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Параметры
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Пример:
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -547,9 +582,205 @@
                   
 
 
-  <h1>Problems</h1>
-
-
+<h1 id="_unpack">_unpack</h1>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">_unpack</span><span class="p">(</span><span class="n">batch</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+</span></code></pre></div>
+Возвращает распакованные аргументы тензора</p>
+<h2 id="_1">Параметры</h2>
+<ul>
+<li><strong> batch </strong> - Входной тензор</li>
+</ul>
+<h2 id="_2">Пример:</h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">arg</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arg</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="c1"># распаковываем входные аргументы </span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c1"># распаковываем выходные аргументы</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">u_xx</span><span class="p">,</span> <span class="n">u_xy</span><span class="p">,</span> <span class="n">u_xz</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">_grad</span><span class="p">(</span><span class="n">u_x</span><span class="p">,</span> <span class="n">arg</span><span class="p">))</span> <span class="c1"># распаковываем градиент от функции</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">u_y</span><span class="p">,</span> <span class="n">v_y</span><span class="p">,</span> <span class="n">w_y</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">_num_diff</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span> <span class="c1"># распаковываем численные производные от функции</span>
+</span></code></pre></div>
+<hr />
+<h1 id="_grad">_grad</h1>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">_grad</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+</span></code></pre></div>
+<p>Возвращает градиент от функции</p>
+<h2 id="_3">Параметры</h2>
+<ul>
+<li><strong> u </strong> - Функция, от которой берут производную</li>
+<li><strong> arg </strong> - Аргументы, по которым берут производные</li>
+</ul>
+<hr />
+<h1 id="_num_diff">_num_diff</h1>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">_num_diff</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1E-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+</span></code></pre></div>
+<p>Возвращает численную аппроксимацию производной</p>
+<h2 id="_4">Параметры</h2>
+<ul>
+<li><strong> arg </strong> - аргумент, по которому дифференцируем</li>
+<li><strong> model </strong> - модель нейронной сети</li>
+<li><strong> f </strong> - функция аппроксимации</li>
+<li><strong> direction </strong> - направление </li>
+<li><strong> eps </strong> - порядок аппроксимации</li>
+</ul>
+<hr />
+<h1 id="_num_diff_random">_num_diff_random</h1>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">_num_diff_random</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">max_eps</span><span class="o">=</span><span class="mf">1E-3</span><span class="p">,</span> <span class="n">min_eps</span><span class="o">=</span><span class="mf">1E-6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+</span></code></pre></div>
+<p>Возвращает производную в рандомной аппроксимации</p>
+<h2 id="_5">Параметры</h2>
+<ul>
+<li><strong> arg </strong> - аргумент, по которому дифференцируем</li>
+<li><strong> model </strong> - модель нейронной сети</li>
+<li><strong> f </strong> - фунцкции аппроксимации </li>
+<li><strong> direction </strong> - направление </li>
+<li><strong> max_eps </strong> - максимальная граница аппроксимации</li>
+<li><strong> min_eps </strong> - минимальная граница аппроксимации</li>
+</ul>
+<hr />
+<h1 id="_random_spherical">_random_spherical</h1>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span> <span class="nf">_random_spherical</span><span class="p">(</span><span class="n">ndim</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+</span></code></pre></div>
+<p>Возвращает векторную норму</p>
+<ul>
+<li><strong> ndim </strong> - размерность</li>
+</ul>
+<hr />
+<h1 id="_diff_residual">_diff_residual</h1>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">_diff_residual</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1E-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+</span></code></pre></div>
+Возвращает производную от невязки</p>
+<h2 id="_6">Параметры</h2>
+<ul>
+<li><strong> arg </strong> - аргумент, передающую в модель</li>
+<li><strong> model </strong> - модель</li>
+<li><strong> eps </strong> - граница аппроксимации</li>
+</ul>
+<hr />
+<h1 id="problem_2d1c_heat_equation">problem_2D1C_heat_equation</h1>
+<p>Уравнение теплопроводности с двумя граничными условиями</p>
+<div class="arithmatex">\[ u_t + u_{xx} = e^{-\gamma^2t} \cdot (-\gamma^2 \cdot (a \cdot \cos{\alpha x} + b \cdot \sin{beta \cdot x}) + b \cdot \beta^2 * \sin{beta \cdot x} + a \cdot \alpha^2 \cdot \cos{\alpha \cdot x})\]</div>
+<div class="arithmatex">\[ u = a \cdot \cos{\alpha \cdot x} + b \cdot \sin{\beta \cdot x} \]</div>
+<div class="arithmatex">\[ u = e^{-\gamma^2 \cdot t} \cdot a\]</div>
+<div class="arithmatex">\[ u = e^{\gamma^{2 \cdot t}} \cdot a \cdot \cos{\alpha \cdot 2} + b \cdot \sin{\beta \cdot 2}\]</div>
+<hr />
+<h1 id="first_problem_2d1c">first_problem_2D1C</h1>
+<p>Уравнение теплопроводности</p>
+<div class="arithmatex">\[ u_t + u_{xx} = 2 - 4 \cdot e^{2x}, x \in [0, 2], y \in [0, 1] \]</div>
+<div class="arithmatex">\[ \left. u \right|_{t = 0} = e^{2x} \]</div>
+<div class="arithmatex">\[ \left. u \right|_{x = 0} = 2t + 1 \]</div>
+<div class="arithmatex">\[ \left. u \right|_{x = 2} = 2t + e^4 \]</div>
+<hr />
+<h1 id="problem_2d2c_heat_equation">problem_2D2C_heat_equation</h1>
+<p>Уравнение теплопроводности с одним граничным условием</p>
+<div class="arithmatex">\[
+\begin{equation}
+    \begin{cases}
+    u_t - u_{xx} = e^{\pi x} \\
+    v_x = u
+ \end{cases}\
+\end{equation}, \ x \in [0, 1], y \in [0, 1]
+\]</div>
+<div class="arithmatex">\[ \left. u \right|_{t = 0} = \cos{\pi x}  \]</div>
+<div class="arithmatex">\[ 
+\begin{equation}
+    \begin{cases}
+    \left. u \right|_{x = 0} = e^{-t \cdot \pi^2} \\
+    \left. v \right|_{x = 0} = t
+    \end{cases}\
+\end{equation}     
+\]</div>
+<div class="arithmatex">\[ \left. u_x \right|_{x = 1} = 0\]</div>
+<h1 id="todo">TODO</h1>
+<ul>
+<li><strong> problem_3D1C_laplace </strong> - Уравнение Лапласа</li>
+<li><strong> problem_1D1C_portal </strong> - # TODO</li>
+<li><strong> problem_2D1C_Allen_Cahn </strong> - Уравнение Аллан-Кана</li>
+</ul>
+<hr />
+<h1 id="_7">Как написать свое уравнение:</h1>
+<h2 id="1">1. Задайте внутренние и граничные условия</h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a> <span class="k">def</span> <span class="nf">ic</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>     <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>     <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>     <span class="k">return</span> <span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">x</span><span class="p">)]</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a> <span class="k">def</span> <span class="nf">bc1</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>     <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>     <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>     <span class="k">return</span> <span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="p">]</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a> <span class="k">def</span> <span class="nf">bc2</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>     <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>     <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>     <span class="k">return</span> <span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>                 <span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)))]</span>
+</span></code></pre></div>
+<h2 id="2">2. Задайте внутренние и граничные области</h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">domain</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">x_min</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">x_max</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">t_0</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</span></code></pre></div>
+<h2 id="3-condition">3. Поместите внутренние и граничные условия в класс Condition:</h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">pde</span> <span class="o">=</span> <span class="p">[</span> <span class="c1"># Связываем каждую область с граничными или внутреннеми областями</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">Condition</span><span class="p">(</span><span class="n">inner</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">Condition</span><span class="p">(</span><span class="n">bc1</span><span class="p">,</span> <span class="n">x_min</span><span class="p">),</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">Condition</span><span class="p">(</span><span class="n">bc2</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">Condition</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">t_0</span><span class="p">),</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">]</span>
+</span></code></pre></div>
+<h4 id="_8">Пример</h4>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span> <span class="nf">problem_2D1C_heat_equation</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">input_dim</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># размерность входных данных (x, t) в примере</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">output_dim</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># размерность выходных данных (u) в примере, может быть больше, если решаем систему уравнений</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">def</span> <span class="nf">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span> <span class="c1"># функция, для удобной распаковки переменных</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        <span class="n">f</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="c1"># получаем f</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="n">u</span><span class="p">,</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c1"># получаем u</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="c1"># получаем входные данные в виде (x, t)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="c1"># возвращаем переменные в виде кортежа</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span> <span class="c1"># уравнение во внутренней области</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span> <span class="c1"># распаковка переменных</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="n">u_x</span><span class="p">,</span> <span class="n">u_t</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">_grad</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">arg</span><span class="p">))</span> <span class="c1"># получаем первые производные от функции</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        <span class="n">u_xx</span><span class="p">,</span> <span class="n">u_xt</span> <span class="o">=</span> <span class="n">_unpack</span><span class="p">(</span><span class="n">_grad</span><span class="p">(</span><span class="n">u_x</span><span class="p">,</span> <span class="n">arg</span><span class="p">))</span> <span class="c1"># получаем вторые производные от функции</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        <span class="n">eq1</span> <span class="o">=</span> <span class="n">u_t</span> <span class="o">-</span> <span class="n">u_xx</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>                    <span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>                <span class="n">beta</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="c1"># записываем наше уравнение</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">eq1</span><span class="p">]</span> <span class="c1"># возвращаем в виде списка уравнения (если есть система уравнение, то возвращаем [eq1, eq2, ..., eqn])</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="c1"># Задаем внутренние и граничные условия:</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="k">def</span> <span class="nf">ic</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>        <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>        <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">x</span><span class="p">)]</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    <span class="k">def</span> <span class="nf">bc1</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>        <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="p">]</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>    <span class="k">def</span> <span class="nf">bc2</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>        <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">basic_symbols</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>        <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>                    <span class="n">a</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)))]</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>    <span class="c1"># Задаем области</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>    <span class="c1"># low = [x1_min, x2_min, ..., xn_min]</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>    <span class="c1"># high = [y1_max, y2_max, ..., yn_max]</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>    <span class="n">domain</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>    <span class="n">x_min</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>    <span class="n">x_max</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>    <span class="n">t_0</span> <span class="o">=</span> <span class="n">RectangleArea</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>    <span class="n">pde</span> <span class="o">=</span> <span class="p">[</span> <span class="c1"># Помещаем условия с областями в виде Condition</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>        <span class="n">Condition</span><span class="p">(</span><span class="n">inner</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>        <span class="n">Condition</span><span class="p">(</span><span class="n">bc1</span><span class="p">,</span> <span class="n">x_min</span><span class="p">),</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>        <span class="n">Condition</span><span class="p">(</span><span class="n">bc2</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>        <span class="n">Condition</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">t_0</span><span class="p">),</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>    <span class="p">]</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>    <span class="k">return</span> <span class="n">pde</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="c1"># возвращаем кортеж из (условии, входная размерность, выходная размерность)</span>
+</span></code></pre></div>
 
 
 
@@ -592,6 +823,12 @@
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

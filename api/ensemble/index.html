@@ -518,46 +518,6 @@
 
               
             
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../regularization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Regularization
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mesh/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Mesh
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -661,8 +621,8 @@
   <h1>Ensemble</h1>
 
 <h2 id="pretrainedensemble">PretrainedEnsemble</h2>
-<pre><code>CLASS neural_network.ensemble.PretrainedEnsemble(layers_all: List, pretrained_models: List[torch.nn.Module])
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.PretrainedEnsemble(layers_all: List, pretrained_models: List[torch.nn.Module])
+</code></pre></div>
 <p>Класс, позволяющий создать ансамбль моделей на основе списка <strong>предобученных моделей</strong> подходом <a href="https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/">stacking</a>. После иницализации работает как torch.nn.Module. </p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -670,26 +630,25 @@
 <li><strong>pretrained_models</strong> (List[torch.nn.Module]) – список предобученных моделей. </li>
 </ul>
 <p><strong>Методы</strong></p>
-<pre><code>forward(input: torch.Tensor)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>forward(input: torch.Tensor)
+</code></pre></div>
 <p>Выполняет прямой проход (forward-pass) ансамбля. </p>
 <p><strong>Примеры использования</strong></p>
-<pre><code class="language-python">from neural_network.ensemble import PretrainedEnsemble
-
-# Определение списка слоев и предобученных моделей
-layers_all = [1, 32, 1]
-pretrained_models = [model1, model2, model3]
-
-# Создание ансамбля из предобученных моделей
-ensemble = PretrainedEnsemble(layers_all, pretrained_models)
-
-# Выполнение прямого ансамбля
-output = ensemble.forward(input_tensor)
-
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">neural_network.ensemble</span> <span class="kn">import</span> <span class="n">PretrainedEnsemble</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Определение списка слоев и предобученных моделей</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">layers_all</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">pretrained_models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">,</span> <span class="n">model3</span><span class="p">]</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Создание ансамбля из предобученных моделей</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">PretrainedEnsemble</span><span class="p">(</span><span class="n">layers_all</span><span class="p">,</span> <span class="n">pretrained_models</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Выполнение прямого ансамбля</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">output</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span></code></pre></div>
 <h2 id="trainableensemble">TrainableEnsemble</h2>
-<pre><code>CLASS neural_network.ensemble.TrainableEnsemble(train_model_list: List[torch.nn.Module])
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.TrainableEnsemble(train_model_list: List[torch.nn.Module])
+</code></pre></div>
 <p>Класс, позволяющий создать ансамбль из еще не обученых моделей, для обучения ансамбля с нуля. После иницализации работает как torch.nn.Module. </p>
 <p>Если вы используете этот класс, то для обучения моделей из ансамбля будут применяется один и тот же оптимизатор и генератор. Для обучения более гибкого ансамбля с нуля используется <a href="#ensembletrainer">EnsembleTrainer</a></p>
 <p><strong>Параметры</strong></p>
@@ -697,25 +656,24 @@ output = ensemble.forward(input_tensor)
 <li><strong>train_model_list</strong>(List[torch.nn.Module]) – список моделей для ансамблирования.</li>
 </ul>
 <p><strong>Методы</strong></p>
-<pre><code>forward(input: torch.Tensor)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>forward(input: torch.Tensor)
+</code></pre></div>
 <p>Выполняет прямой проход (forward-pass) ансамбля.
 <strong>Примеры использования:</strong></p>
-<pre><code class="language-python">from neural_network.ensemble import TrainableEnsemble
-
-# Определение списка моделей для ансамблирования
-models = [model1, model2, model3]
-
-# Создание ансамбля из еще не обученных моделей
-ensemble = TrainableEnsemble(models)
-
-# Выполнение прямого прохода ансамбля
-output = ensemble(input_tensor)
-
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">neural_network.ensemble</span> <span class="kn">import</span> <span class="n">TrainableEnsemble</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Определение списка моделей для ансамблирования</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">,</span> <span class="n">model3</span><span class="p">]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Создание ансамбля из еще не обученных моделей</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">TrainableEnsemble</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Выполнение прямого прохода ансамбля</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">output</span> <span class="o">=</span> <span class="n">ensemble</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span></code></pre></div>
 <h2 id="ensembleinstance">EnsembleInstance</h2>
-<pre><code>CLASS neural_network.ensemble.EnsembleInstance(model_name: str, pinn: PINN, optimizer: torch.optim.Optimizer, scheduler: torch.optim.LRScheduler)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.EnsembleInstance(model_name: str, pinn: PINN, optimizer: torch.optim.Optimizer, scheduler: torch.optim.LRScheduler)
+</code></pre></div>
 <p>Класс EnsembleInstance используется для хранения информации об одной модели для обучения ансамбля, в котором для каждой модели задаются произвольные оптимизатор (optimizer), генераторы (generator), курс обучения (scheduler). Он создается в функции <a href="#ensemble_builder">ensemble_builder</a>. При инициализации этот класс принимает четыре аргумента:</p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -725,12 +683,12 @@ output = ensemble(input_tensor)
 <li><strong>scheduler</strong>(torch.optim.lr_scheduler.LRScheduler) – scheduler для модели, например.</li>
 </ul>
 <p><strong>Методы</strong></p>
-<pre><code>get_parameters -&gt; Tuple[str, PINN, Optimizer, LRScheduler]
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>get_parameters -&gt; Tuple[str, PINN, Optimizer, LRScheduler]
+</code></pre></div>
 <p>Возвращает сохраненные параметры для модели. </p>
 <h2 id="ensembletrainer">EnsembleTrainer</h2>
-<pre><code>CLASS neural_network.ensemble.EnsembleTrainer(ensemble_config: List[EnsembleInstance], output_dim: int, **kwargs)
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.EnsembleTrainer(ensemble_config: List[EnsembleInstance], output_dim: int, **kwargs)
+</code></pre></div>
 <p>Модификация класса <a href="../trainer/">Trainer</a> для обучения ансамбля, в котором для каждой модели задаются произвольные оптимизатор (optimizer), генераторы (generator), курс обучения (scheduler). </p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -739,25 +697,25 @@ output = ensemble(input_tensor)
 <li><strong>**kwargs</strong> – аргументы <a href="../trainer/">Trainer</a>.</li>
 </ul>
 <p><strong>Методы</strong></p>
-<pre><code>train -&gt; None
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>train -&gt; None
+</code></pre></div>
 <p>Обучает ансамбль. </p>
 <p><strong>Примеры использования</strong>:</p>
 <p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.</p>
-<pre><code class="language-python">callbacks_orgaziner = EnsembleCallbacksOrganizer(callbacks)
-
-trainer = EnsembleTrainer(
-    ensemble_config,
-    callbacks_organizer=callbacks_orgaziner,
-    num_epochs=1000,
-    output_dim=1,
-)
-
-trainer.train()
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">callbacks_orgaziner</span> <span class="o">=</span> <span class="n">EnsembleCallbacksOrganizer</span><span class="p">(</span><span class="n">callbacks</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">EnsembleTrainer</span><span class="p">(</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">ensemble_config</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">callbacks_organizer</span><span class="o">=</span><span class="n">callbacks_orgaziner</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">output_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div>
 <h2 id="ensemble_builder">ensemble_builder</h2>
-<pre><code>FUNCTION neural_network.ensemble.ensemble_builder
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code>FUNCTION neural_network.ensemble.ensemble_builder
+</code></pre></div>
 <p>Вспомогательная функция для подготовки нескольких <a href="#ensembleinstance">EnsembleInstance</a> из списка моделей, генераторов, оптимизаторов. </p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -770,46 +728,46 @@ trainer.train()
 <li><strong>conditions</strong>(List[Condition]) - список условий. </li>
 </ul>
 <p><strong>Примеры использования:</strong></p>
-<p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.</p>
-<pre><code class="language-python">models = [
-    ResNet([input_dim, 32, 64, 64, 32, output_dim]),
-    FNN([input_dim, 128, 256, 128, output_dim]),
-    XavierFNN([input_dim, 128, 128, 128, 128, output_dim]),
-]
-
-generators_domain = [
-    UniformGeneratorRect(n_points=5000, method=&quot;uniform&quot;) for _ in range(3)
-]
-
-generators_boundary = [
-    UniformGeneratorRect(n_points=500, method=&quot;uniform&quot;) for _ in range(3)
-]
-
-optimizers = [torch.optim.Adam(model.parameters()) for model in models]
-
-schedulers = [ExponentialLR(optimizer=opt, gamma=0.999) for opt in optimizers]
-
-ensemble_config = ensemble_builder(
-    models,
-    generators_domain,
-    generators_boundary,
-    [0, 1, 2, 3],
-    optimizers,
-    schedulers,
-    conditions,
-)
-
-#Используем полученную конфигурацию для обучения:
-
-trainer = EnsembleTrainer(
-    ensemble_config,
-    callbacks_organizer=callbacks_orgaziner,
-    num_epochs=1000,
-    output_dim=output_dim,
-)
-
-trainer.train()
-</code></pre>
+<p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">ResNet</span><span class="p">([</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">]),</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">FNN</span><span class="p">([</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">]),</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">XavierFNN</span><span class="p">([</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">]),</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">]</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">generators_domain</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">UniformGeneratorRect</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">]</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">generators_boundary</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">UniformGeneratorRect</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">]</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">optimizers</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="n">schedulers</span> <span class="o">=</span> <span class="p">[</span><span class="n">ExponentialLR</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.999</span><span class="p">)</span> <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">optimizers</span><span class="p">]</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="n">ensemble_config</span> <span class="o">=</span> <span class="n">ensemble_builder</span><span class="p">(</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="n">models</span><span class="p">,</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="n">generators_domain</span><span class="p">,</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="n">generators_boundary</span><span class="p">,</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="n">optimizers</span><span class="p">,</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="n">schedulers</span><span class="p">,</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    <span class="n">conditions</span><span class="p">,</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="p">)</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="c1">#Используем полученную конфигурацию для обучения:</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">EnsembleTrainer</span><span class="p">(</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="n">ensemble_config</span><span class="p">,</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="n">callbacks_organizer</span><span class="o">=</span><span class="n">callbacks_orgaziner</span><span class="p">,</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="n">num_epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>    <span class="n">output_dim</span><span class="o">=</span><span class="n">output_dim</span><span class="p">,</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="p">)</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div></p>
 
 
 
@@ -852,6 +810,12 @@ trainer.train()
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
