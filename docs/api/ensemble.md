@@ -104,7 +104,7 @@ output = ensemble(input_tensor)
 
 **Примеры использования**:
 
-Полноценный пример в разделе [Ансамблирование моделей](/docs/guide/ensemble.ipynb).
+Полноценный пример в разделе [Ансамблирование моделей](../guide/ensemble.ipynb).
 
 ```python
 callbacks_orgaziner = EnsembleCallbacksOrganizer(callbacks)
@@ -135,7 +135,7 @@ trainer.train()
 
 **Примеры использования:**
 
-Полноценный пример в разделе [Ансамблирование моделей](/docs/guide/ensemble.ipynb).
+Полноценный пример в разделе [Ансамблирование моделей](../guide/ensemble.ipynb).
 ```python
 models = [
     ResNet([input_dim, 32, 64, 64, 32, output_dim]),
