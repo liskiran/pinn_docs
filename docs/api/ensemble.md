@@ -1,3 +1,9 @@
+# Ensemble
+
+Ансамблирование - мощный метод в машинном обучении, который объединяет предсказания нескольких моделей. Он может смягчать недостатки отдельных моделей и повышать устойчивость и точность предсказаний. В нашем модуле представлены два класса, которые обеспечивают создание и обучение ансамблей напрямую из набора нейросетей: [PretrainedEnsemble](#pretrainedensemble) и [TrainableEnsemble](#trainableensemble).
+
+Также, для обучения ансамбля с нуля с использованием **различных** конфигураций обучения для каждой модели, реализованы клаccы [EnsembleTrainer](#ensembletrainer), [EnsembleInstance](#ensembleinstance) и вспомогательный метод [ensemble_builder](#ensemble_builder).
+
 ## PretrainedEnsemble
     CLASS neural_network.ensemble.PretrainedEnsemble(layers_all: List, pretrained_models: List[torch.nn.Module])
 
@@ -41,7 +47,7 @@ output = ensemble.forward(input_tensor)
 
 **Параметры**
 
-- **train_model_list**(List[torch.nn.Module]) – список моделей для ансамблирования.
+- **train_model_list** (List[torch.nn.Module]) – список моделей для ансамблирования.
 
 **Методы**
 
@@ -73,10 +79,10 @@ output = ensemble(input_tensor)
 
 **Параметры**
 
-- **model_name**(str) – название текущей модели. Используется для сохранения и логгирования.
-- **pinn**(PINN) – экземпляр PINN для текущей модели. Должен содержать информацию о генераторах и геометрии. 
-- **optimizer**(torch.optim.Optimizer) - оптимизатор для модели, например torch.optim.Adam.
-- **scheduler**(torch.optim.lr_scheduler.LRScheduler) – scheduler для модели, например.
+- **model_name** (str) – название текущей модели. Используется для сохранения и логгирования.
+- **pinn** (PINN) – экземпляр PINN для текущей модели. Должен содержать информацию о генераторах и геометрии. 
+- **optimizer** (torch.optim.Optimizer) - оптимизатор для модели, например torch.optim.Adam.
+- **scheduler** (torch.optim.lr_scheduler.LRScheduler) – scheduler для модели, например.
 
 **Методы**
 
@@ -92,8 +98,8 @@ output = ensemble(input_tensor)
 
 **Параметры**
 
-- **ensemble_config**(List[[EnsembleInstance](#ensembleinstance)]) - информация для ансабля полученная с помощью [ensemble_builder](#ensemble_builder). 
-- **output_dim**(int) - размер выхода ансамбля. 
+- **ensemble_config** (List[[EnsembleInstance](#ensembleinstance)]) - информация для ансабля полученная с помощью [ensemble_builder](#ensemble_builder). 
+- **output_dim** (int) - размер выхода ансамбля. 
 - **\*\*kwargs** – аргументы [Trainer](trainer.md).
 
 **Методы**
@@ -102,7 +108,7 @@ output = ensemble(input_tensor)
     
 Обучает ансамбль. 
 
-**Примеры использования**:
+**Примеры использования**
 
 Полноценный пример в разделе [Ансамблирование моделей](../guide/ensemble.ipynb).
 
@@ -125,13 +131,13 @@ trainer.train()
 
 **Параметры**
 
-- **models**(List[torch.nn.Module]) - список моделей для ансамблирования.
-- **generatorss_domain**(List[BaseGenerator]) - список генераторов (*в области*) для каждой модели.
-- **generators_bound**(List[BaseGenerator]) - список генераторов (*на границе*) для каждой модели.
-- **condition_idx**(List[int]) - список индексов условий.
-- **optimizers**(List[Optimizer]) - список оптимизаторов
-- **schedulers**(List[LRScheduler]) - список scheduler'ов.
-- **conditions**(List[Condition]) - список условий. 
+- **models** (List[torch.nn.Module]) - список моделей для ансамблирования.
+- **generatorss_domain** (List[BaseGenerator]) - список генераторов (*в области*) для каждой модели.
+- **generators_bound** (List[BaseGenerator]) - список генераторов (*на границе*) для каждой модели.
+- **condition_idx** (List[int]) - список индексов условий.
+- **optimizers** (List[Optimizer]) - список оптимизаторов
+- **schedulers** (List[LRScheduler]) - список scheduler'ов.
+- **conditions** (List[Condition]) - список условий.  
 
 **Примеры использования:**
 
