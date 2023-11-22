@@ -623,16 +623,16 @@
 <h2 id="pretrainedensemble">PretrainedEnsemble</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.PretrainedEnsemble(layers_all: List, pretrained_models: List[torch.nn.Module])
 </code></pre></div>
-<p>Класс, позволяющий создать ансамбль моделей на основе списка <strong>предобученных моделей</strong> подходом <a href="https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/">stacking</a>. После иницализации работает как torch.nn.Module. </p>
+<p>Класс, позволяющий создать ансамбль моделей на основе списка <strong>предобученных моделей</strong> подходом <a href="https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/">stacking</a>. После иницализации работает как torch.nn.Module.</p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>layers_all</strong> (List) – список слоев FNN модели, которая будет аггрегировать выходы предобученных моделей.</li>
-<li><strong>pretrained_models</strong> (List[torch.nn.Module]) – список предобученных моделей. </li>
+<li><strong>pretrained_models</strong> (List[torch.nn.Module]) – список предобученных моделей.</li>
 </ul>
 <p><strong>Методы</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(input: torch.Tensor)
 </code></pre></div>
-<p>Выполняет прямой проход (forward-pass) ансамбля. </p>
+<p>Выполняет прямой проход (forward-pass) ансамбля.</p>
 <p><strong>Примеры использования</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">neural_network.ensemble</span> <span class="kn">import</span> <span class="n">PretrainedEnsemble</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -649,7 +649,7 @@
 <h2 id="trainableensemble">TrainableEnsemble</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.TrainableEnsemble(train_model_list: List[torch.nn.Module])
 </code></pre></div>
-<p>Класс, позволяющий создать ансамбль из еще не обученых моделей, для обучения ансамбля с нуля. После иницализации работает как torch.nn.Module. </p>
+<p>Класс, позволяющий создать ансамбль из еще не обученых моделей, для обучения ансамбля с нуля. После иницализации работает как torch.nn.Module.</p>
 <p>Если вы используете этот класс, то для обучения моделей из ансамбля будут применяется один и тот же оптимизатор и генератор. Для обучения более гибкого ансамбля с нуля используется <a href="#ensembletrainer">EnsembleTrainer</a></p>
 <p><strong>Параметры</strong></p>
 <ul>
@@ -678,28 +678,28 @@
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>model_name</strong>(str) – название текущей модели. Используется для сохранения и логгирования.</li>
-<li><strong>pinn</strong>(PINN) – экземпляр PINN для текущей модели. Должен содержать информацию о генераторах и геометрии. </li>
+<li><strong>pinn</strong>(PINN) – экземпляр PINN для текущей модели. Должен содержать информацию о генераторах и геометрии.</li>
 <li><strong>optimizer</strong>(torch.optim.Optimizer) - оптимизатор для модели, например torch.optim.Adam.</li>
 <li><strong>scheduler</strong>(torch.optim.lr_scheduler.LRScheduler) – scheduler для модели, например.</li>
 </ul>
 <p><strong>Методы</strong></p>
 <div class="language-text highlight"><pre><span></span><code>get_parameters -&gt; Tuple[str, PINN, Optimizer, LRScheduler]
 </code></pre></div>
-<p>Возвращает сохраненные параметры для модели. </p>
+<p>Возвращает сохраненные параметры для модели.</p>
 <h2 id="ensembletrainer">EnsembleTrainer</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS neural_network.ensemble.EnsembleTrainer(ensemble_config: List[EnsembleInstance], output_dim: int, **kwargs)
 </code></pre></div>
-<p>Модификация класса <a href="../trainer/">Trainer</a> для обучения ансамбля, в котором для каждой модели задаются произвольные оптимизатор (optimizer), генераторы (generator), курс обучения (scheduler). </p>
+<p>Модификация класса <a href="../trainer/">Trainer</a> для обучения ансамбля, в котором для каждой модели задаются произвольные оптимизатор (optimizer), генераторы (generator), курс обучения (scheduler).</p>
 <p><strong>Параметры</strong></p>
 <ul>
-<li><strong>ensemble_config</strong>(List[<a href="#ensembleinstance">EnsembleInstance</a>]) - информация для ансабля полученная с помощью <a href="#ensemble_builder">ensemble_builder</a>. </li>
-<li><strong>output_dim</strong>(int) - размер выхода ансамбля. </li>
+<li><strong>ensemble_config</strong>(List[<a href="#ensembleinstance">EnsembleInstance</a>]) - информация для ансабля полученная с помощью <a href="#ensemble_builder">ensemble_builder</a>.</li>
+<li><strong>output_dim</strong>(int) - размер выхода ансамбля.</li>
 <li><strong>**kwargs</strong> – аргументы <a href="../trainer/">Trainer</a>.</li>
 </ul>
 <p><strong>Методы</strong></p>
 <div class="language-text highlight"><pre><span></span><code>train -&gt; None
 </code></pre></div>
-<p>Обучает ансамбль. </p>
+<p>Обучает ансамбль.</p>
 <p><strong>Примеры использования</strong>:</p>
 <p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">callbacks_orgaziner</span> <span class="o">=</span> <span class="n">EnsembleCallbacksOrganizer</span><span class="p">(</span><span class="n">callbacks</span><span class="p">)</span>
@@ -716,7 +716,7 @@
 <h2 id="ensemble_builder">ensemble_builder</h2>
 <div class="language-text highlight"><pre><span></span><code>FUNCTION neural_network.ensemble.ensemble_builder
 </code></pre></div>
-<p>Вспомогательная функция для подготовки нескольких <a href="#ensembleinstance">EnsembleInstance</a> из списка моделей, генераторов, оптимизаторов. </p>
+<p>Вспомогательная функция для подготовки нескольких <a href="#ensembleinstance">EnsembleInstance</a> из списка моделей, генераторов, оптимизаторов.</p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>models</strong>(List[torch.nn.Module]) - список моделей для ансамблирования.</li>
@@ -725,10 +725,10 @@
 <li><strong>condition_idx</strong>(List[int]) - список индексов условий.</li>
 <li><strong>optimizers</strong>(List[Optimizer]) - список оптимизаторов</li>
 <li><strong>schedulers</strong>(List[LRScheduler]) - список scheduler'ов.</li>
-<li><strong>conditions</strong>(List[Condition]) - список условий. </li>
+<li><strong>conditions</strong>(List[Condition]) - список условий.</li>
 </ul>
 <p><strong>Примеры использования:</strong></p>
-<p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.
+<p>Полноценный пример в разделе <a href="/docs/guide/ensemble.ipynb">Ансамблирование моделей</a>.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">ResNet</span><span class="p">([</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">]),</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">FNN</span><span class="p">([</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">]),</span>
@@ -767,7 +767,7 @@
 </span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="p">)</span>
 </span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
 </span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 
 
 
@@ -806,7 +806,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
