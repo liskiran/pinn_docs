@@ -15,26 +15,20 @@ def _unpack(batch: torch.Tensor) -> torch.Tensor:
 ** Пример **
 
 ```python
-x, y, z = _unpack(arg) # (1)
-
-u, v, w = _unpack(f)
-# распаковываем выходные аргументы
-
-u_xx, u_xy, u_xz = _unpack(_grad(u_x, arg))
-# распаковываем градиент от функции
-# в данном примере функцию u_x раскалыдывается на три вектора
-# u_xx, u_xy, u_xz
-
-u_y, v_y, w_y = _unpack(_num_diff(arg, model, f, [0, 1, 0]))
-# распаковываем численные производные от функции
-# в данном примере функцию u_x раскалыдывается на три вектора
-# u_y, v_y, w_y, которые расскладывается по одному аргументу
-# по всем выходным векторам
-
+x, y, z = _unpack(arg) # (1)!
+u, v, w = _unpack(f) # (2)!
+u_xx, u_xy, u_xz = _unpack(_grad(u_x, arg)) # (3)!
+u_y, v_y, w_y = _unpack(_num_diff(arg, model, f, [0, 1, 0])) # (4)!
 ```
 
-1.  the same as x, y, z = arg[:, 0], arg[:, 1], arg[:, 2]
-    распаковываем входные аргументы
+1. Распаковываем входные аргументы
+2. Распаковываем выходные аргументы
+3. Распаковываем градиент от функции.
+   В данном примере функция `u_x` раскалыдывается на три вектора `u_xx, u_xy, u_xz`
+4. Распаковываем численные производные от функции.
+   В данном примере функцию `u_x` раскалыдывается на три вектора
+   `u_y, v_y, w_y`, которые расскладывается по одному аргументу
+   по всем выходным векторам
 
 ---
 
@@ -120,12 +114,27 @@ def _diff_residual(arg, model, eps=1e-4) -> torch.Tensor:
 
 ## problem_2D1C_heat_equation
 
+```python
+def problem_2D1C_heat_equation(a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
+```
+
 Уравнение теплопроводности с двумя граничными условиями
 
 $$
 u_t + u_{xx} = e^{-\gamma^2t}  (-\gamma^2 (a cos(\alpha x) + \
 b sin(\beta x)) + b  \beta^2 sin(beta x) + a \alpha^2 cos(\alpha x))
 $$
+
+```python
+def inner(arg, model):
+        f, u, x, t = basic_symbols(arg, model)
+        u_x, u_t = _unpack(_grad(u, arg))
+        u_xx, u_xt = _unpack(_grad(u_x, arg))
+        eq1 = u_t - u_xx - torch.exp(-gamma ** 2 * t) * (
+                    -gamma ** 2 * (a * torch.cos(alpha * x) + b * torch.sin(beta * x)) + b * beta ** 2 * torch.sin(
+                beta * x) + a * alpha ** 2 * torch.cos(alpha * x))
+        return [eq1]
+```
 
 $$ u = a cos(\alpha x) + b sin(\beta x) $$
 
@@ -241,13 +250,10 @@ pde = [ # Связываем каждую область с граничными
 
 ```python
 def problem_2D1C_heat_equation(a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
-    input_dim = 2
-    # размерность входных данных (x, t) в примере
+    input_dim = 2 # (1)!
+    output_dim = 1 # (2)!
 
-    output_dim = 1
-    # размерность выходных данных (u) в примере, может быть больше, если решаем систему уравнений
-
-    def basic_symbols(arg, model): # функция, для удобной распаковки переменных
+    def basic_symbols(arg, model): # (3)!
         f = model(arg)
         # получаем f
 
@@ -313,3 +319,7 @@ def problem_2D1C_heat_equation(a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
 
     return pde, input_dim, output_dim # возвращаем кортеж из (условии, входная размерность, выходная размерность)
 ```
+
+1. Размерность входных данных (x, t) в примере
+2. размерность выходных данных (u) в примере, может быть больше, если решаем систему уравнений
+3. функция, для удобной распаковки переменных

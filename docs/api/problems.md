@@ -2,7 +2,7 @@
 
 ## unpack
 
-```python title="problems.py"
+```python
 def _unpack(batch: torch.Tensor) -> torch.Tensor:
 ```
 
@@ -114,16 +114,54 @@ def _diff_residual(arg, model, eps=1e-4) -> torch.Tensor:
 
 ## problem_2D1C_heat_equation
 
+```python
+def problem_2D1C_heat_equation(a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
+```
+
 Уравнение теплопроводности с двумя граничными условиями
+
+```python
+def inner(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    u_x, u_t = _unpack(_grad(u, arg))
+    u_xx, u_xt = _unpack(_grad(u_x, arg))
+    eq1 = u_t - u_xx - torch.exp(-gamma ** 2 * t) * (
+                -gamma ** 2 * (a * torch.cos(alpha * x) + b * torch.sin(beta * x)) + b * beta ** 2 * torch.sin(
+            beta * x) + a * alpha ** 2 * torch.cos(alpha * x))
+    return [eq1]
+```
 
 $$
 u_t + u_{xx} = e^{-\gamma^2t}  (-\gamma^2 (a cos(\alpha x) + \
 b sin(\beta x)) + b  \beta^2 sin(beta x) + a \alpha^2 cos(\alpha x))
 $$
 
+```python
+def ic(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    assert torch.all(torch.isclose(t, torch.zeros_like(t)))
+    return [u - a * torch.cos(alpha * x) - b * torch.sin(beta * x)]
+```
+
 $$ u = a cos(\alpha x) + b sin(\beta x) $$
 
+```python
+def bc1(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    assert torch.all(torch.isclose(x, torch.zeros_like(x)))
+    return [u - torch.exp(-gamma ** 2 * t) * a]
+```
+
 $$ u = e^{-\gamma^2 t} a$$
+
+```python
+def bc2(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    assert torch.all(torch.isclose(x, torch.ones_like(x) * 2))
+    return [u - torch.exp(-gamma ** 2 * t) * (
+                a * torch.cos(torch.tensor(alpha * 2)) + b * torch.sin(torch.tensor(beta * 2)))]
+
+```
 
 $$ u = e^{\gamma^{2 t}} a cos(2 \alpha) + b sin(2\beta) $$
 
@@ -133,17 +171,47 @@ $$ u = e^{\gamma^{2 t}} a cos(2 \alpha) + b sin(2\beta) $$
 
 Уравнение теплопроводности
 
+```python
+def inner(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    u_x, u_t = _unpack(_grad(u, arg))
+    u_xx, u_xt = _unpack(_grad(u_x, arg))
+    eq1 = u_t - u_xx - (2 - 4 * torch.exp(2 * x))
+    return [eq1]
+```
+
 $$
 u_t + u_{xx} = 2 - 4  e^{2x}, x \in [0, 2], y \in [0, 1]
 $$
+
+```python
+def ic(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    assert torch.all(torch.isclose(t, torch.zeros_like(t)))
+    return [torch.exp(2 * x) - u]
+```
 
 $$
 \left. u \right|_{t = 0} = e^{2x}
 $$
 
+```python
+def bc1(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    assert torch.all(torch.isclose(x, torch.zeros_like(x)))
+    return [1 + 2 * t - u]
+```
+
 $$
 \left. u \right|_{x = 0} = 2t + 1
 $$
+
+```python
+def bc2(arg, model):
+    f, u, x, t = basic_symbols(arg, model)
+    assert torch.all(torch.isclose(x, 2 * torch.ones_like(x)))
+    return [torch.exp(torch.tensor(4)) + 2 * t - u]
+```
 
 $$
 \left. u \right|_{x = 2} = 2t + e^4
@@ -181,7 +249,43 @@ $$
 \left. u_x \right|_{x = 1} = 0
 $$
 
-TODO
+# problem_3D1C_laplace
+
+$$
+Area: x \in [-1, 1], \
+      y \in [-1, 1], \
+      z \in [-1, 1]
+$$
+
+Solution:
+
+$$
+u = \frac{(cos(\pi x) - 1) * e^{2y}}{11 \cdot (2 + z)}
+$$
+
+$$
+u_{xx} + u_{yy} + u_{zz} - \frac{e^{2y} \cdot ((4 \cdot (cos(\pi x) - (\pi^2) \cdot cos(\pi x) \cdot  (2 + z)^2 + 2 \cdot cos(\pi x) - 2)}{11 \cdot (2 + z) \cdot (2 + z)^2} = 0
+$$
+
+$$
+u = 0
+$$
+
+$$
+u = \frac{(cos(\pi x) - 1) * e}{11 \cdot (2 + z)} y = 0
+$$
+
+$$
+u = \frac{(cos(\pi x) - 1) * e^{2y}}{11 \cdot 2} z = 0
+$$
+
+$$
+u = \frac{(cos(\pi x) - 1) * e^{2y}}{11 \cdot 2} z = 0
+$$
+
+---
+
+- TODO
 
 - ** problem_3D1C_laplace ** - Уравнение Лапласа
 - ** problem_1D1C_portal ** - # TODO
@@ -239,37 +343,21 @@ def problem_2D1C_heat_equation(a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
     output_dim = 1 # (2)!
 
     def basic_symbols(arg, model): # (3)!
-        f = model(arg)
-        # получаем f
+        f = model(arg) # (4)!
+        u, = _unpack(f) # (5)!
+        x, t = _unpack(arg) # (6)!
+        return f, u, x, t # (7)!
 
-        u, = _unpack(f)
-        # получаем u
-
-        x, t = _unpack(arg)
-        # получаем входные данные в виде (x, t)
-
-        return f, u, x, t
-        # возвращаем переменные в виде кортежа
-
-    def inner(arg, model): # уравнение во внутренней области
-        f, u, x, t = basic_symbols(arg, model)
-        # распаковка переменных
-
-        u_x, u_t = _unpack(_grad(u, arg))
-        # получаем первые производные от функции
-
-        u_xx, u_xt = _unpack(_grad(u_x, arg))
-        # получаем вторые производные от функции
-
+    def inner(arg, model): # (8)!
+        f, u, x, t = basic_symbols(arg, model) # (9)!
+        u_x, u_t = _unpack(_grad(u, arg)) # (10)!
+        u_xx, u_xt = _unpack(_grad(u_x, arg)) # (11)!
         eq1 = u_t - u_xx - torch.exp(-gamma ** 2 * t) * (
                     -gamma ** 2 * (a * torch.cos(alpha * x) + b * torch.sin(beta * x)) + b * beta ** 2 * torch.sin(
-                beta * x) + a * alpha ** 2 * torch.cos(alpha * x))
-        # записываем наше уравнение
+                beta * x) + a * alpha ** 2 * torch.cos(alpha * x)) # (12)!
+        return [eq1] # (13)!
 
-        return [eq1]
-        # возвращаем в виде списка уравнения (если есть система уравнение, то возвращаем [eq1, eq2, ..., eqn])
-
-    # Задаем внутренние и граничные условия:
+    # (14)!
     def ic(arg, model):
         f, u, x, t = basic_symbols(arg, model)
         assert torch.all(torch.isclose(t, torch.zeros_like(t)))
@@ -286,25 +374,36 @@ def problem_2D1C_heat_equation(a=1, b=0.5, alpha=0.5, beta=10, gamma=0.7):
         return [u - torch.exp(-gamma ** 2 * t) * (
                     a * torch.cos(torch.tensor(alpha * 2)) + b * torch.sin(torch.tensor(beta * 2)))]
 
-    # Задаем области
-    # low = [x1_min, x2_min, ..., xn_min]
-    # high = [y1_max, y2_max, ..., yn_max]
-
+    # (15)!
     domain = RectangleArea(low=[0, 0], high=[2, 2])
     x_min = RectangleArea(low=[0, 0], high=[0, 2])
     x_max = RectangleArea(low=[2, 0], high=[2, 2])
     t_0 = RectangleArea(low=[0, 0], high=[2, 0])
 
-    pde = [ # Помещаем условия с областями в виде Condition
+    pde = [ # (16)!
         Condition(inner, domain),
         Condition(bc1, x_min),
         Condition(bc2, x_max),
         Condition(ic, t_0),
     ]
 
-    return pde, input_dim, output_dim # возвращаем кортеж из (условии, входная размерность, выходная размерность)
+    return pde, input_dim, output_dim # (17)!
 ```
 
 1. Размерность входных данных (x, t) в примере
 2. размерность выходных данных (u) в примере, может быть больше, если решаем систему уравнений
 3. функция, для удобной распаковки переменных
+4. получаем f
+5. получаем u
+6. получаем входные данные в виде (x, t)
+7. возвращаем переменные в виде кортежа
+8. уравнение во внутренней области
+9. распаковка переменных
+10. получаем первые производные от функции
+11. получаем вторые производные от функции
+12. записываем наше уравнение
+13. возвращаем в виде списка уравнения (если есть система уравнение, то возвращаем [eq1, eq2, ..., eqn])
+14. Задаем внутренние и граничные условия:
+15. Задаем области: low = [x1_min, x2_min, ..., xn_min]; high = [y1_max, y2_max, ..., yn_max]
+16. Помещаем условия с областями в виде Condition
+17. возвращаем кортеж из (условии, входная размерность, выходная размерность)
