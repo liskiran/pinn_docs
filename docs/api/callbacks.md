@@ -224,6 +224,57 @@ save_dir = "reports"
 PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='show')
 ```
 
+## MeshHeatmapPrediction
+
+    CLASS callbacks.heatmap.MeshHeatmapPrediction(self, save_dir: str, period: int, points: torch.Tensor, save_mode: str = 'html', output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z"))
+Функция обратного вызова (callback) для построения тепловой карты (heatmap) решения на mesh сетке.
+
+**Параметры**
+
+- **save_dir** (str) : директория для сохранения графика,
+- **period** (int) : период сохранения графиков,
+- **points** (torch.Tensor) : точки для построения графика,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
+
+**Методы**
+
+- **__call__(self, trainer: Trainer)** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
+```python
+from src.neural_network import FNN
+from src.PINN import PINN
+from src.callbacks.heatmap import MeshHeatmapPrediction
+
+conditions, input_dim, output_dim = src.problems.real_navier_stocks(Re=60, mesh_file_path ='../nsu_1.pt', mass=True)
+model = FNN(layers_all=[input_dim, 64, output_dim])
+pinn = PINN(model=model, conditions=conditions)
+save_dir = "reports"
+callbacks = [MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=0),
+            MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=1),
+            MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=2),
+            MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=3)]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks,
+)
+trainer.train()
+```
+
 ## BasicCurve
     CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True)
 Абстрактный класс для наследования другими классами тепловых карт.
