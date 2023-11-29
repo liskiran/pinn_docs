@@ -270,14 +270,14 @@ trainer = Trainer(
     scheduler=scheduler,
     num_epochs=5000,
     update_grid_every=100,
-    callbacks=callbacks,
-)
+    callbacks=callbacks)
 trainer.train()
 ```
 
 ## BasicCurve
-    CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True)
-Абстрактный класс для наследования другими классами тепловых карт.
+    CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True, x_title: str = "Epoch", y_title: str = "Loss")
+Абстрактный класс для наследования другими классами кривых.
+
 **Параметры**
 
 - **save_dir** (str) : директория для сохранения графика,
@@ -287,13 +287,17 @@ trainer.train()
     - “png” : сохраняет тепловые карты в указанной директории в формате png;
     - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
     - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
-- **log_scale**(bool) : флаг, определяющий будет ли ось OY логарифмирована.
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована,
+- **x_title** (str) : название оси абсцисс (по умочанию "Epoch"),
+- **y_title** (str) : название оси ординат (по умолчанию "Loss"),
+- **metric_history** (list) : список для сохранения истории значений метркии.
 
 **Методы**
 
-- **draw(self, values: Sequence, v_names: [str], coord: np.ndarray, plot_title: str, file_name: str = None)** : Строит и сохраняет кривую.
+- **draw(self, values: Sequence, v_names: [str], coord: np.ndarray, plot_title: str)** : Строит и сохраняет кривую.
 - **dict_data(fig)** : Сохраняет данные графика в виде словаря.
-- **init_curve_names(self, conditions)** : Нзначает названия кривым в зависимости от conditions.
+- **init_curve_names(self, conditions)** : Нзначает названия кривым в зависимости от conditions,
+- **reset(self, new_save_dir: str = None)** : Меняет название директории для сохранения графика.
 
 ## GridResidualCurve
     CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True)
