@@ -49,8 +49,8 @@ grid = Grid.from_condition(conditions, 10001)
 
   
 
-## BaseSave
-    CLASS callbacks.heatmap.BaseSave(self, save_dir: str, period: int, save_mode: str = 'html')
+## BaseImageSave
+    CLASS callbacks.heatmap.BaseImageSave(self, save_dir: str, period: int, save_mode: str = 'html')
     
 Абстрактный класс для наследования класса BaseHeatmap
 
@@ -70,7 +70,7 @@ grid = Grid.from_condition(conditions, 10001)
 - **save_pt(self, fig, file: str)** : Метод для сохранения точек графика.
   
 ## BaseHeatmap
-    CLASS callbacks.heatmap.BaseHeatmap(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html'):
+    CLASS callbacks.heatmap.BaseHeatmap(self, grid: Grid, save_dir: str, period: int = 500, save_mode: Literal["html", "png", "pt", "show"] = "html", output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z")
     
 Абстрактный класс для наследования другими классами тепловых карт.
 
@@ -83,19 +83,24 @@ grid = Grid.from_condition(conditions, 10001)
     - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
     - “png” : сохраняет тепловые карты в указанной директории в формате png;
     - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
-    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную.
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
-- **draw(self, values: torch.Tensor, plot_name: str, file_name: str = None)** : В зависимости от размерности вызывают одну из функций для построения тепловой карты.
+- **draw(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name = "z", y_name = "y", z_name="z")** : В зависимости от размерности вызывают одну из функций для построения тепловой карты.
 - **dict_data(self, fig)** : Метод для сохранения точек графика.
-- **draw_3D(self, values: torch.Tensor, plot_name: str, file_name: str = None)** : Строит трехмерную тепловую карту и сохраняет ее в выбранном формате.
-- **draw_2D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max=None)** : Строит двумерную тепловую карту и сохраняет ее в выбранном формате.
-- **draw_1D(self, values: torch.Tensor, plot_name: str, file_name: str = None)** : Строит одномерную тепловую карту и сохраняет ее в выбранном формате.
+- **draw_3D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name="x", y_name="y", z_name="z")** : Строит трехмерную тепловую карту и сохраняет ее в выбранном формате.
+- **draw_2D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name = "x", y_name = "y")** : Строит двумерную тепловую карту и сохраняет ее в выбранном формате.
+- **draw_1D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name = "x")** : Строит одномерную тепловую карту и сохраняет ее в выбранном формате.
 ## HeatmapError
 
-    CLASS callbacks.heatmap.HeatmapError(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor], period: int = 500,
-                 save_mode: str = 'html')
+    CLASS callbacks.heatmap.HeatmapError(self, grid: Grid, save_dir: str, period: int = 500, save_mode: Literal["html", "png", "pt", "show"] = "html", output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z")
     
 Функция обратного вызова (callback) для создания тепловых карт ошибок во время обучения модели.
 
@@ -109,7 +114,13 @@ grid = Grid.from_condition(conditions, 10001)
     - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
     - “png” : сохраняет тепловые карты в указанной директории в формате png;
     - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
-    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную.
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
@@ -137,7 +148,7 @@ trainer.train()
 
 ## HeatmapPrediction
 
-    CLASS callbacks.heatmap.HeatmapPrediction(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html')
+    CLASS callbacks.heatmap.HeatmapPrediction(self, grid: Grid, save_dir: str, period: int = 500, save_mode: Literal["html", "png", "pt", "show"] = "html", output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z")
     
 Функция обратного вызова (callback) для создания тепловых карт решения, полученного моделью.
 
@@ -150,7 +161,13 @@ trainer.train()
     - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
     - “png” : сохраняет тепловые карты в указанной директории в формате png;
     - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
-    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную.
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
@@ -176,7 +193,7 @@ trainer.train()
 ## PlotHeatmapSolution
 
     CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
-                 save_mode: str = 'html')
+                 save_mode: str = 'html', min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z"))
     
 Класс для построения графика точного решения. Это не функция обратного вызова (callback)!
 
@@ -189,7 +206,12 @@ trainer.train()
     - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
     - “png” : сохраняет тепловые карты в указанной директории в формате png;
     - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
-    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную.
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Пример использования**
 ```python
@@ -241,7 +263,7 @@ PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='sho
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
-- 
+
 **Пример использования**
 ```python
 from src.callbacks.curve import GridResidualCurve
