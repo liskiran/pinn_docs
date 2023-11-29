@@ -64,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#pinn" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -294,6 +299,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PINN
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -304,6 +322,32 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pinn_1" class="md-nav__link">
+    PINN
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -493,6 +537,23 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pinn_1" class="md-nav__link">
+    PINN
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -507,9 +568,68 @@
                   
 
 
-  <h1>PINN</h1>
-
-
+<h1 id="pinn">PINN</h1>
+<p><a href="#pinn-1">PINN</a> (Physics-Informed Neural Network)–  это класс, предназначенный для удобной работы с физически-информированными нейронными сетями. Он хранит необходимые объекты для обучения, такие как модель, уравнение и граничные/начальные условия, функцию потерь. </p>
+<p>Данный класс реализует методы необходимые для обучения нейросети: подсчет функции потерь, обновление значений точек обучающей выборки.</p>
+<h2 id="pinn_1">PINN</h2>
+<div class="language-text highlight"><pre><span></span><code>CLASS src.PINN.PINN(model: torch.nn.Module, conditions: List[Condition], loss_function: torch.nn.modules.loss)
+</code></pre></div>
+<p><strong>Параметры</strong></p>
+<ul>
+<li><strong>model</strong> (torch.nn.Module) – PyTorch модель. Например, <a href="../neural_network/#feed-forward-neural-network">FNN</a>. </li>
+<li><strong>conditions</strong> (List[<a href="condition.md">Condition</a>]) – список условий, каждое из которых характеризует отдельное уравнение или граничное/начальное условие. </li>
+<li><strong>loss_function</strong> (torch.nn.modules.loss) – функция потерь. По умолчанию <a href="https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">torch.nn.MSELoss</a>.</li>
+</ul>
+<p><strong>Методы</strong></p>
+<div class="language-text highlight"><pre><span></span><code>update_data() -&gt; None
+</code></pre></div>
+<p>Для каждого условия обновляет точки сетки, используя метод [update_points] Используется для ресемплинга.</p>
+<div class="language-text highlight"><pre><span></span><code>calculate_condition_loss(cond: Condition) -&gt; List[torch.Tensor]
+</code></pre></div>
+<p>Считает уже выбранную функцию потерь на конкретном условии, которое передается в аргумент.</p>
+<div class="language-text highlight"><pre><span></span><code>calculate_loss() -&gt; List[torch.Tensor]
+</code></pre></div>
+<p>Считает функцию потерь на всех заданнных в PINN условиях. Возвращает итоговые суммарные потери. </p>
+<div class="language-text highlight"><pre><span></span><code>calculate_loss_on_points(cond: Condition, points: torch.Tensor) -&gt; List[torch.Tensor]
+</code></pre></div>
+<p>Считает функцию потерь для конкретного условия при заданном наборе точек. Используется, например, для отрисовки потерь на другой, отличной от сетки для обучения сетке. </p>
+<p><strong>Примеры использования</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">conditions</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">problems</span><span class="o">.</span><span class="n">navier_stocks_equation_with_block</span><span class="p">()</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">set_device</span><span class="p">()</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">model</span> <span class="o">=</span> <span class="n">FNN</span><span class="p">(</span><span class="n">layers_all</span><span class="o">=</span><span class="p">[</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">])</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">generator_domain</span> <span class="o">=</span> <span class="n">UniformGeneratorRect</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                                        <span class="n">n_dims</span><span class="o">=</span><span class="n">input_dim</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                                        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                                        <span class="n">add_points</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">generator_bound</span> <span class="o">=</span> <span class="n">UniformGeneratorRect</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                                        <span class="n">n_dims</span><span class="o">=</span><span class="n">input_dim</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                                        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                                        <span class="n">add_points</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">generators_config</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="p">{</span><span class="s2">&quot;condition_index&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;generator&quot;</span><span class="p">:</span> <span class="n">generator_domain</span><span class="p">},</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">]</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">configure_generators</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">generators_config</span><span class="p">,</span> <span class="n">default_gen</span><span class="o">=</span><span class="n">generator_bound</span><span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">pinn</span> <span class="o">=</span> <span class="n">PINN</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">conditions</span><span class="o">=</span><span class="n">conditions</span><span class="p">)</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">ExponentialLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9999</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="n">pinn</span><span class="o">=</span><span class="n">pinn</span><span class="p">,</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="n">num_epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="n">update_grid_every</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="p">)</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</span></code></pre></div>
 
 
 

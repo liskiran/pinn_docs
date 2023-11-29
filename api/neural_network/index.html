@@ -667,48 +667,43 @@
 
 
 <h1 id="_1">Нейронные сети</h1>
-<p>В бибилотеки реализованы различные архитектуры нейронных сетей:
+<p>В библиотеке реализованы различные архитектуры нейронных сетей:
 - Feed forward neural network
 - Xavier feed forward neural network
 - Residual neural network
 - Densely connected linear networks </p>
-<p>Помимо архитектур было реализовано <a href="#ensembletrainer">ансамблирование</a> моделей, при котором существует возможность использование всех моделей разом. Более того в архитектурах моделей используются адаптивная функция активации <a href="#siren">Siren</a> и оптимизированная функция <a href="#gelu">GeLU</a>.</p>
+<p>Помимо архитектур было реализовано <a href="#ensembletrainer">ансамблирование</a> моделей, благодаря чему существует возможность использования всех моделей разом для обучения. Более того в архитектурах нейронных сетей используются адаптивная функция активации <a href="#siren">Siren</a> и оптимизированная функция <a href="#gelu">GeLU</a>, что значительно улучшает и ускоряет обучение модели.</p>
 <h2 id="feed-forward-neural-network">Feed forward neural network</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS: src.neural_network.FNN(layers_all: List[int])
 </code></pre></div>
-<p>Модель включает в себя целостный класс FNN, где задается количество нейронов. Архитектура FNN включает линейные слои, которые связаны между собой адаптивной функцией активации Sirena и функциями <a href="#gelu">GeLU</a>.В процессе обучения в методе forward модель обрабатывает входящие данные через каждый ленный слой для предсказания решения.</p>
-<p><strong>Параметры</strong></p>
+<p>Модель включает в себя целостный класс FNN, где задается количество нейронов. Архитектура FNN включает линейные слои, которые связаны между собой адаптивной функцией активации <a href="#sine">Siren</a> и функциями <a href="#gelu">GeLU</a>.В процессе обучения в методе forward модель обрабатывает входящие данные через каждый линейный слой для предсказания решения.</p>
+<p><strong>Параметр</strong></p>
 <ul>
 <li><strong>layers_all</strong> (List) - список нейронов по слоям для обучения.</li>
 </ul>
 <blockquote>
 <p><strong><em>Важно:</em></strong>  Первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.</p>
 </blockquote>
-<p><strong>Методы</strong></p>
+<p><strong>Метод</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(x: torch.Tensor)
 </code></pre></div>
-<p><strong>Параметры</strong></p>
-<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели
+<p><strong>Параметр</strong></p>
+<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 </code></pre></div>
-<p>Выполняет прямой проход обучения модели. </p>
-<p><strong>Примеры использования:</strong></p>
+<p>Выполняет прямой проход обучения нейронной сети. </p>
+<p><strong>Пример использования:</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">src.neural_network</span> <span class="kn">import</span> <span class="n">FNN</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Определение входных и выходных нейронов </span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Определение входных и выходных нейронов и слоев нейронов в модели</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">input_size</span> <span class="o">=</span> <span class="mi">2</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">output_size</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Определение слоев нейронов в модели</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_size</span><span class="p">]</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">output_size</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_size</span><span class="p">]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Выполнение прямого прохода модели</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">model</span> <span class="o">=</span> <span class="n">FNN</span><span class="p">(</span><span class="n">layers_all</span><span class="o">=</span><span class="n">layers</span><span class="p">)</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Определение модели</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">model</span> <span class="o">=</span> <span class="n">FNN</span><span class="p">(</span><span class="n">layers_all</span><span class="o">=</span><span class="n">layers</span><span class="p">)</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Выполнение прямого прохода модели</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="xavier-feed-forward-neural-network">Xavier feed forward neural network</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS: src.neural_network.XavierFNN (layers_all: List[int], init_mode: str)
@@ -717,47 +712,43 @@
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>layers_all</strong> (List) - список нейронов по слоям для обучения.</li>
-<li><strong>init_mode</strong> (str) - метод инициализации весов ‘norm’/’uniform’ </li>
+<li><strong>init_mode</strong> (str) - метод инициализации весов ‘norm’/’uniform’.</li>
 </ul>
-<p><strong>Методы</strong></p>
+<p><strong>Метод</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(input: torch.Tensor)
 </code></pre></div>
-<p><strong>Параметры</strong></p>
+<p><strong>Параметр</strong></p>
 <div class="language-text highlight"><pre><span></span><code>input (torch.Tensor) - входной тензор данных для прямого прохода модели
 </code></pre></div>
 <p>Выполняет прямой проход обучения модели. </p>
-<p><strong>Примеры использования:</strong></p>
+<p><strong>Пример использования:</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">src.neural_network</span> <span class="kn">import</span> <span class="n">XavierFNN</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Определение входных и выходных нейронов </span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Определение входных и выходных нейронов и слоев нейронов в модели </span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">input_size</span> <span class="o">=</span> <span class="mi">2</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">output_size</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># Определение слоев нейронов в модели</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_size</span><span class="p">]</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># Определение метода инициализации весов</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">mode</span><span class="o">=</span> <span class="s1">&#39;norm&#39;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">output_size</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">output_size</span><span class="p">]</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Определение метода инициализации весов</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">mode</span><span class="o">=</span> <span class="s1">&#39;norm&#39;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">model</span> <span class="o">=</span> <span class="n">XavierFNN</span> <span class="p">(</span><span class="n">layers_all</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># Определение модели</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">model</span> <span class="o">=</span> <span class="n">XavierFNN</span> <span class="p">(</span><span class="n">layers_all</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1"># Выполнение прямого прохода модели</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># Выполнение прямого прохода модели</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="residual-neural-network">Residual neural network</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS: src.neural_network.ResNet(layers_all: List[int], blocks: List[int], res_block: nn.Module, activation_function_array: List[nn.Module])
 </code></pre></div>
-<p>Модель включает в себя классы ResNet и LightResidualBlock. В самой модели ResNet задается количество линейных блоков и нейронов для каждого блока соответственно, более того при задании класса требуется передать вид линейного блока (LightResidualBlock) и функции активации, которые будут соединять линейные слои в блоках. Во время обучения происходит skip-connection, при котором пропускается часть слоев через блоки линейных слоев. </p>
+<p>Модель включает в себя классы ResNet и LightResidualBlock. В самой модели ResNet задается количество линейных блоков и нейронов для каждого блока соответственно, более того при задании класса требуется передать вид линейного блока (LightResidualBlock) и функции активации, которые будут соединять линейные слои в блоках. Во время обучения происходит пропуск части слоев нейронов через блоки (LightResidualBlock) линейных слоев, благодаря чему не происходит затухания градиентов и модель обучается лучше.  </p>
 <p><strong>Параметры</strong></p>
 <ul>
 <li><strong>layers_all</strong>(List) – список, содержащий количества нейроннов для каждого блока слоев Resnet.<blockquote>
 <p><strong><em>Важно:</em></strong>  первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.</p>
 </blockquote>
 </li>
-<li><strong>blocks</strong>(List) – список, содержащий количество блоков для каждого количества нейроннов<blockquote>
+<li><strong>blocks</strong>(List) – список, содержащий количество блоков для каждого количества нейроннов.<blockquote>
 <p><strong><em>Важно:</em></strong>  При подаче None для каждого слоя будет использовать один блок.</p>
 </blockquote>
 </li>
@@ -767,21 +758,21 @@
 <p><strong>Методы</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(x: torch.Tensor)
 </code></pre></div>
-<p><strong>Параметры</strong></p>
-<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели
+<p><strong>Параметр</strong></p>
+<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 </code></pre></div>
 <p>Выполняет прямой проход обучения модели. </p>
 <div class="language-text highlight"><pre><span></span><code>__make_layers(res_block: nn.Module,count_blocks: int,in_features: int,out_features: int,activation: nn.Module, is_not_last: bool):
 </code></pre></div>
 <p><strong>Параметры</strong>
-   - res_block (nn.Module) - блок ResNet, реализованный на базе ResidualBlock
-   - count_blocks (int) - колличество блоков ResNet
-   - in_features (int) - колличество входных нейронов в слои блока ResNet
-   - out_features (int) - колличество выходных нейронов в слои блока ResNet
-   - activation (nn.Module) - функция активации, соеденяющаяя линейнные слои
-   - is_not_last (bool) - ограничение, показывающее, что следующего блока ResNet нет</p>
+   - res_block (nn.Module) - блок ResNet, реализованный на базе ResidualBlock.
+   - count_blocks (int) - колличество блоков ResNet.
+   - in_features (int) - колличество входных нейронов в слои блока ResNet.
+   - out_features (int) - колличество выходных нейронов в слои блока ResNet.
+   - activation (nn.Module) - функция активации, соеденяющаяя линейнные слои.
+   - is_not_last (bool) - ограничение, показывающее, что следующего блока ResNet нет.</p>
 <p>Конструирует блоки ResidualBlock одного размера и последующий линейнный слой новой размерности.</p>
-<p><strong>Примеры использования:</strong></p>
+<p><strong>Пример использования:</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">src.neural_network</span> <span class="kn">import</span> <span class="n">ResNet</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Определение входных и выходных нейронов </span>
@@ -805,17 +796,17 @@
 <h2 id="residual-block">Residual block</h2>
 <div class="language-text highlight"><pre><span></span><code>  CLASS: src.neural_network. LightResidualBlock (activation: nn.Module, features: int)
 </code></pre></div>
-<p>Архитектура блока в Residual neural network. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков</p>
+<p>Архитектура блока в Residual neural network. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков.</p>
 <p><strong>Параметры</strong></p>
 <ul>
-<li><strong>features</strong>(int) – Размерность входных данных.</li>
-<li><strong>activation</strong>(nn.Module) – функция активации</li>
+<li><strong>features</strong>(int) – размерность входных данных.</li>
+<li><strong>activation</strong>(nn.Module) – функция активации.</li>
 </ul>
 <p><strong>Методы</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(x: torch.Tensor)
 </code></pre></div>
 <p><strong>Параметры</strong></p>
-<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели
+<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 </code></pre></div>
 <p>Выполняет прямой проход обучения блока модели ResNet.</p>
 <p><strong>Пример</strong></p>
@@ -841,48 +832,46 @@
 <p><strong><em>Важно:</em></strong>  Первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.</p>
 </blockquote>
 </li>
-<li><strong>blocks</strong>(List) – список, содержащий количество блоков (DenseBlock) для каждого количества нейроннов</li>
+<li><strong>blocks</strong>(List) – список, содержащий количество блоков (DenseBlock) для каждого количества нейроннов.</li>
 </ul>
 <p><strong>Методы</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(x: torch.Tensor)
 </code></pre></div>
 <p><strong>Параметры</strong></p>
-<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели
+<div class="language-text highlight"><pre><span></span><code>x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 </code></pre></div>
 <p>Выполняет прямой проход обучения блока модели DenseNet.</p>
 <h2 id="densely-block">Densely block</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS: src.neural_network.DenseBlock(activation: nn.Module , dimension_layer: int, features: int)
 </code></pre></div>
+<p>Архитектура блока передачи информации для каждого линейнного слоя.</p>
 <p><strong>Параметры</strong></p>
 <ul>
-<li><strong>activation</strong> (nn.Module) - функция активации</li>
-<li><strong>dimension_layer</strong>(int) – количество блоков (Densely block) </li>
+<li><strong>activation</strong> (nn.Module) - функция активации.</li>
+<li><strong>dimension_layer</strong>(int) – количество блоков (Densely block).</li>
 <li><strong>features</strong>(int) - размерность входных и выходных данных данных.</li>
 </ul>
-<p><strong>Методы</strong></p>
+<p><strong>Метод</strong></p>
 <div class="language-text highlight"><pre><span></span><code>forward(self, x: torch.Tensor)
 </code></pre></div>
-<p><strong>Параметры</strong>
-    x (torch.Tensor) - входной тензор данных для прямого прохода модели</p>
+<p><strong>Параметр</strong>
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.</p>
 <h2 id="gelu">GELU</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS: src.neural_network.activation_function.GELU(nn.Module)
 </code></pre></div>
 <p>Функция активации GeLU с ускорением расчетов в процессе обучения.</p>
-<p><strong>Методы</strong>
+<p><strong>Метод</strong>
     forward(input: torch.Tensor)</p>
-<p><strong>Параметры</strong>
-    input (torch.Tensor) - входной тензор данных для прямого прохода функции</p>
+<p><strong>Параметр</strong>
+    input (torch.Tensor) - входной тензор данных для прямого прохода функции.</p>
 <p>Выполняет прямой проход функции активации во время обучения модели с оптимизацией torch.jit.script.</p>
-<p><strong>Пример</strong></p>
-<p>gelu = GELU()</p>
-<p><strong>Примеры использования:</strong></p>
+<p><strong>Пример использования:</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">src.neural_network.activation_function</span> <span class="kn">import</span> <span class="n">GeLU</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Определение функции активации</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">gelu</span> <span class="o">=</span> <span class="n">GeLU</span><span class="p">()</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Выполнение прямого прохода </span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">output</span> <span class="o">=</span> <span class="n">gelu</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">output</span> <span class="o">=</span> <span class="n">gelu</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="sine">Sine</h2>
 <div class="language-text highlight"><pre><span></span><code>CLASS: src.neural_network.activation_function.Sine(nn.Module)
@@ -891,18 +880,15 @@
 <p><strong>Методы</strong>
     forward(input: torch.Tensor)</p>
 <p><strong>Параметры</strong>
-    input (torch.Tensor) - входной тензор данных для прямого прохода функции</p>
+    input (torch.Tensor) - входной тензор данных для прямого прохода функции.</p>
 <p>Выполняет прямой проход адаптивной функции синуса во время обучения модели с оптимизацией torch.jit.script.</p>
-<p><strong>Пример</strong></p>
-<p>sine = Sine()</p>
-<p><strong>Примеры использования:</strong></p>
+<p><strong>Пример использования:</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">src.neural_network.activation_function</span> <span class="kn">import</span> <span class="n">Sine</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Определение функции активации</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">sine</span> <span class="o">=</span> <span class="n">Sine</span><span class="p">()</span>
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Выполнение прямого прохода </span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">output</span> <span class="o">=</span> <span class="n">sine</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">output</span> <span class="o">=</span> <span class="n">sine</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
 </span></code></pre></div>
 
 
