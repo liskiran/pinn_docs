@@ -26,7 +26,7 @@
 
 **Параметр**
 
-    x (torch.Tensor) - входной тензор данных для прямого прохода модели
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 
 Выполняет прямой проход обучения нейронной сети. 
 
@@ -58,7 +58,7 @@ output = model(input_tensor)
 **Параметры**
 
 - **layers_all** (List) - список нейронов по слоям для обучения.
-- **init_mode** (str) - метод инициализации весов ‘norm’/’uniform’ 
+- **init_mode** (str) - метод инициализации весов ‘norm’/’uniform’.
 
 **Метод**
 
@@ -103,7 +103,7 @@ output = model(input_tensor)
 
 - **layers_all**(List) – список, содержащий количества нейроннов для каждого блока слоев Resnet.
 > **_Важно:_**  первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.
-- **blocks**(List) – список, содержащий количество блоков для каждого количества нейроннов
+- **blocks**(List) – список, содержащий количество блоков для каждого количества нейроннов.
 > **_Важно:_**  При подаче None для каждого слоя будет использовать один блок.
 - **res_block**(nn.Module) - блок ResNet, реализованный на базе ResidualBlock.
 - **activation_function_array**(List) – список, содержащий функции активации, которые используются при обучении.
@@ -114,7 +114,7 @@ output = model(input_tensor)
 
 **Параметр**
 
-    x (torch.Tensor) - входной тензор данных для прямого прохода модели
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 
 Выполняет прямой проход обучения модели. 
 
@@ -122,12 +122,12 @@ output = model(input_tensor)
     __make_layers(res_block: nn.Module,count_blocks: int,in_features: int,out_features: int,activation: nn.Module, is_not_last: bool):
 
 **Параметры**
-   - res_block (nn.Module) - блок ResNet, реализованный на базе ResidualBlock
-   - count_blocks (int) - колличество блоков ResNet
-   - in_features (int) - колличество входных нейронов в слои блока ResNet
-   - out_features (int) - колличество выходных нейронов в слои блока ResNet
-   - activation (nn.Module) - функция активации, соеденяющаяя линейнные слои
-   - is_not_last (bool) - ограничение, показывающее, что следующего блока ResNet нет
+   - res_block (nn.Module) - блок ResNet, реализованный на базе ResidualBlock.
+   - count_blocks (int) - колличество блоков ResNet.
+   - in_features (int) - колличество входных нейронов в слои блока ResNet.
+   - out_features (int) - колличество выходных нейронов в слои блока ResNet.
+   - activation (nn.Module) - функция активации, соеденяющаяя линейнные слои.
+   - is_not_last (bool) - ограничение, показывающее, что следующего блока ResNet нет.
     
 Конструирует блоки ResidualBlock одного размера и последующий линейнный слой новой размерности.
 
@@ -161,12 +161,12 @@ output = model(input_tensor)
 ## Residual block
       CLASS: src.neural_network. LightResidualBlock (activation: nn.Module, features: int)
 
-Архитектура блока в Residual neural network. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков
+Архитектура блока в Residual neural network. На вход блок сети принимает входные и выходные значения для линейных слоев и функцию активации для связи блоков.
 
 **Параметры**
 
-- **features**(int) – Размерность входных данных.
-- **activation**(nn.Module) – функция активации
+- **features**(int) – размерность входных данных.
+- **activation**(nn.Module) – функция активации.
 
 **Методы**
 
@@ -174,7 +174,7 @@ output = model(input_tensor)
 
 **Параметры**
 
-    x (torch.Tensor) - входной тензор данных для прямого прохода модели
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 
 Выполняет прямой проход обучения блока модели ResNet.
 
@@ -206,7 +206,7 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 
 - **layers_all** (List) - список нейронов по слоям для обучения.
 > **_Важно:_**  Первое и последнее значение массива нейронов должно соответствовать геометрией задачи и количеством выводов.
-- **blocks**(List) – список, содержащий количество блоков (DenseBlock) для каждого количества нейроннов
+- **blocks**(List) – список, содержащий количество блоков (DenseBlock) для каждого количества нейроннов.
 
 **Методы**
 
@@ -214,36 +214,38 @@ layer = LightResidualBlock(features = input_neuron, activation = gelu)
 
 **Параметры**
 
-    x (torch.Tensor) - входной тензор данных для прямого прохода модели
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 
 Выполняет прямой проход обучения блока модели DenseNet.
 
 ## Densely block
     CLASS: src.neural_network.DenseBlock(activation: nn.Module , dimension_layer: int, features: int)
+    
+Архитектура блока передачи информации для каждого линейнного слоя.
 
 **Параметры**
 
-- **activation** (nn.Module) - функция активации
-- **dimension_layer**(int) – количество блоков (Densely block) 
+- **activation** (nn.Module) - функция активации.
+- **dimension_layer**(int) – количество блоков (Densely block).
 - **features**(int) - размерность входных и выходных данных данных.
 
-**Методы**
+**Метод**
 
     forward(self, x: torch.Tensor)
     
-**Параметры**
-    x (torch.Tensor) - входной тензор данных для прямого прохода модели
+**Параметр**
+    x (torch.Tensor) - входной тензор данных для прямого прохода модели.
 
 ## GELU
     CLASS: src.neural_network.activation_function.GELU(nn.Module)
 
 Функция активации GeLU с ускорением расчетов в процессе обучения.
 
-**Методы**
+**Метод**
     forward(input: torch.Tensor)
 
-**Параметры**
-    input (torch.Tensor) - входной тензор данных для прямого прохода функции
+**Параметр**
+    input (torch.Tensor) - входной тензор данных для прямого прохода функции.
     
 Выполняет прямой проход функции активации во время обучения модели с оптимизацией torch.jit.script.
 
@@ -268,7 +270,7 @@ output = gelu(input_tensor)
     forward(input: torch.Tensor)
 
 **Параметры**
-    input (torch.Tensor) - входной тензор данных для прямого прохода функции
+    input (torch.Tensor) - входной тензор данных для прямого прохода функции.
     
 Выполняет прямой проход адаптивной функции синуса во время обучения модели с оптимизацией torch.jit.script.
 
