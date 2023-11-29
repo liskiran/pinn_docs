@@ -195,7 +195,8 @@ trainer.train()
     CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
                  save_mode: str = 'html', min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z"))
     
-Класс для построения графика точного решения. Это не функция обратного вызова (callback)!
+Класс для построения графика точного решения.
+> **_Важно:_** Это не функция обратного вызова (callback)!
 
 **Параметры**
 
@@ -300,8 +301,10 @@ trainer.train()
 - **reset(self, new_save_dir: str = None)** : Меняет название директории для сохранения графика.
 
 ## GridResidualCurve
-    CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True)
-Функция обратного вызова (callback) для построения кривых обучения при помощи сетки.
+    CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True, condition_index=0)
+Функция обратного вызова (callback) для построения кривых обучения на сетке Grid.
+
+> **_Важно:_** Убедитесь, что Grid соответствует conditions.
 
 **Параметры**
 
@@ -313,7 +316,8 @@ trainer.train()
     - “png” : сохраняет тепловые карты в указанной директории в формате png;
     - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
     - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
-- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована.
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована,
+- **condition_index** (int) : номер условия для построения графика.
 
 **Методы**
 
