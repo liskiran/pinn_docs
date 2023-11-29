@@ -1,6 +1,6 @@
 # Нейронные сети
 
-В бибилотеке реализованы различные архитектуры нейронных сетей:
+В библиотеке реализованы различные архитектуры нейронных сетей:
 - Feed forward neural network
 - Xavier feed forward neural network
 - Residual neural network
