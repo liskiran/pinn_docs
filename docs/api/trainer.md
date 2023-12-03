@@ -22,13 +22,13 @@ def __init__(self,
 ### Параметры:
 
 - `pinn: PINN` - Объект класса `PINN` содержащий в себе информацию об модели, уравнениях и функции ошибки.
-- `optimizer: torch.optim.Optimizer` - Оптимизатор необходимый для обучения нейронной сети
-- `scheduler: torch.optim.lr_scheduler.LRScheduler` - Шедулер для рбновления learning rate нейронной сети
-- `num_epochs: int` (default: 1000) - Количество эпох для обучения нейронной сети
+- `optimizer: torch.optim.Optimizer` - Оптимизатор необходимый для обучения нейронной сети.
+- `scheduler: torch.optim.lr_scheduler.LRScheduler` - Шедулер для рбновления learning rate нейронной сети.
+- `num_epochs: int` (default: 1000) - Количество эпох для обучения нейронной сети.
 - `update_grid_every: int` (default: 1) - Обновление сетки для изменения пространственно-временных координат.
-- `calc_loss: Callable[[], List[torch.Tensor]]` (default: None) - Функция ошибки
-- `callbacks_organizer: CallbacksOrganizer` (default: None) - Объект класса `CallbacksOrganizer` для управления визуализацией и информацией во время обучения
-- `mixed_training: bool` (default: False)
+- `calc_loss: Callable[[], List[torch.Tensor]]` (default: None) - Функция ошибки.
+- `callbacks_organizer: CallbacksOrganizer` (default: None) - Объект класса `CallbacksOrganizer` для управления визуализацией и информацией во время обучения.
+- `mixed_training: bool` (default: False) - Флаг, позволяющий использовать mixed precision training, необходимый для корректировки градиентов при обратном проходе. Если градиент в float16 приблизительно равен нулю, тогда мы можем умножить градиент на корректирующий коеффициент, чтобы градиент не занулялся, а при прямом проходе возместить этот измененный градиент. При этом у нас градиент не зануляется, а процесс обучения аналогичный. И благодаря этому мы не теряем информацию.
 
 ---
 
