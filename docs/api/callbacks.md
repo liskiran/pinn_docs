@@ -1,3 +1,4 @@
+
 ## Grid
     CLASS callbacks.heatmap.Grid(low: np.array, high: np.array, n_points: Union[Sequence[int], int])
 
@@ -359,6 +360,8 @@ trainer.train()
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 ```python
 from src.callbacks.curve import TrainingCurve
 
@@ -393,6 +396,8 @@ trainer.train()
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 
 ```python
 from src.callbacks.curve import LearningRateCurve
@@ -430,6 +435,8 @@ trainer.train()
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 
 ```python
 from src.callbacks.curve import ErrorCurve
@@ -473,6 +480,7 @@ trainer.train()
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
 
+**Пример использования**
 ```python
 from src.callbacks.progress import TqdmBar
 
@@ -499,6 +507,8 @@ trainer.train()
 **Методы**
 
 - **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 ```python
 from src.callbacks.save import SaveModel
 
@@ -515,10 +525,38 @@ trainer = Trainer(
 trainer.train()
 ```
 ## CallbacksOrganizer
-    CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback])
-Класс для сортировки функций обратного вызова (callback).
+    CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback], mkdir: bool = True)
+Класс для сортировки и хранения функций обратного вызова (callback), а также создания директории для сохранения файлов.
 
 **Параметры**
 
-- **callbacks** (List[BaseCallback]) : список функций обратного вызова (callback).
+- **callbacks** (List[BaseCallback]) : список функций обратного вызова (callback),
+- **mkdir** (bool) : флаг создания директорий для функций обратного вызова с сохранением файлов.
 
+**Пример использования**
+```python
+save_dir = "reports"
+grid = src.callbacks.heatmap.Grid.from_pinn(pinn, 10001)
+callbacks = [  
+    src.callbacks.progress.TqdmBar('Epoch {epoch} lr={lr:.2e} Loss={loss_eq} Total={total_loss:.2e}'),  
+    src.callbacks.curve.LearningRateCurve(save_dir, 500, log_scale=False),  
+    src.callbacks.curve.LossCurve(save_dir, 100),  
+    src.callbacks.curve.GridResidualCurve(save_dir, 100, grid=grid),  
+    src.callbacks.heatmap.HeatmapPrediction(save_dir, 500, grid=grid)]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks_organizer=CallbacksOrganizer(callbacks))
+trainer.train()
+```
+
+## EnsembleCallbacksOrganizer
+	class callbacks.callbacks_organizer.EnsembleCallbacksOrganizer(self, callbacks: List[BaseCallback])
+
+Класс для сортировки и хранения функций обратного вызова (callback) для использования в ансамбле. Класс позволяет использовать функции обратного вызова (callback) во всех моделях ансамбля.
+**Параметры**
+
+- **callbacks** (List[BaseCallback]) : список функций обратного вызова (callback).
