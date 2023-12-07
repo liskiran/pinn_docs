@@ -1,3 +1,4 @@
+
 ## Grid
     CLASS callbacks.heatmap.Grid(low: np.array, high: np.array, n_points: Union[Sequence[int], int])
 
@@ -5,9 +6,9 @@
 
 **Параметры**
 
-- **low** (np.array) – массив со значениями нижних границ для каждой оси,
-- **high** (np.array) – np.array со значениями верхних границ для каждой оси,
-- **n_points** (Union[Sequence[int], int]) — массив со значениями количества точек по каждой оси / общее количество точек на весь Grid.
+- **low** (np.array) : массив со значениями нижних границ для каждой оси,
+- **high** (np.array) : np.array со значениями верхних границ для каждой оси,
+- **n_points** (Union[Sequence[int], int]) : массив со значениями количества точек по каждой оси / общее количество точек на весь Grid.
 
 **Методы**
 
@@ -49,16 +50,20 @@ grid = Grid.from_condition(conditions, 10001)
 
   
 
-## BaseSave
-    CLASS callbacks.heatmap.BaseSave(self, save_dir: str, period: int, save_mode: str = 'html')
+## BaseImageSave
+    CLASS callbacks.heatmap.BaseImageSave(self, save_dir: str, period: int, save_mode: str = 'html')
     
 Абстрактный класс для наследования класса BaseHeatmap
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
+- **save_dir** (str) : директория для сохранения графика,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную.
 
 **Методы**
 
@@ -66,42 +71,61 @@ grid = Grid.from_condition(conditions, 10001)
 - **save_pt(self, fig, file: str)** : Метод для сохранения точек графика.
   
 ## BaseHeatmap
-    CLASS callbacks.heatmap.BaseHeatmap(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html'):
+    CLASS callbacks.heatmap.BaseHeatmap(self, grid: Grid, save_dir: str, period: int = 500, save_mode: Literal["html", "png", "pt", "show"] = "html", output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z")
     
 Абстрактный класс для наследования другими классами тепловых карт.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **grid** (str) – объект класса Grid,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
+- **save_dir** (str) : директория для сохранения графика,
+- **grid** (str) : объект класса Grid,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
-- **draw(self, values: torch.Tensor, plot_name: str, file_name: str = None)** : В зависимости от размерности вызывают одну из функций для построения тепловой карты.
+- **draw(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name = "z", y_name = "y", z_name="z")** : В зависимости от размерности вызывают одну из функций для построения тепловой карты.
 - **dict_data(self, fig)** : Метод для сохранения точек графика.
-- **draw_3D(self, values: torch.Tensor, plot_name: str, file_name: str = None)** : Строит трехмерную тепловую карту и сохраняет ее в выбранном формате.
-- **draw_2D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max=None)** : Строит двумерную тепловую карту и сохраняет ее в выбранном формате.
-- **draw_1D(self, values: torch.Tensor, plot_name: str, file_name: str = None)** : Строит одномерную тепловую карту и сохраняет ее в выбранном формате.
+- **draw_3D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name="x", y_name="y", z_name="z")** : Строит трехмерную тепловую карту и сохраняет ее в выбранном формате.
+- **draw_2D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name = "x", y_name = "y")** : Строит двумерную тепловую карту и сохраняет ее в выбранном формате.
+- **draw_1D(self, values: torch.Tensor, plot_name: str, file_name: str = None, min = None, max = None, x_name = "x")** : Строит одномерную тепловую карту и сохраняет ее в выбранном формате.
 ## HeatmapError
 
-    CLASS callbacks.heatmap.HeatmapError(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor], period: int = 500,
-                 save_mode: str = 'html')
+    CLASS callbacks.heatmap.HeatmapError(self, grid: Grid, save_dir: str, period: int = 500, save_mode: Literal["html", "png", "pt", "show"] = "html", output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z")
     
-Функция обратного вызова(callback) для создания тепловых карт ошибок во время обучения модели.
+Функция обратного вызова (callback) для создания тепловых карт ошибок во время обучения модели.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **grid** (str) – объект класса Grid,
-- **solution** — функция точного решения,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
+- **save_dir** (str) : директория для сохранения графика,
+- **grid** (str) : объект класса Grid,
+- **solution** : функция точного решения,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
-- **__call__(self, trainer: Trainer))** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer)** : Использование функции обратного вызова (callback) при обучении модели.
 
 **Пример использования**
 ```python
@@ -125,20 +149,30 @@ trainer.train()
 
 ## HeatmapPrediction
 
-    CLASS callbacks.heatmap.HeatmapPrediction(self, save_dir: str, grid: Grid, period: int = 500, save_mode: str = 'html')
+    CLASS callbacks.heatmap.HeatmapPrediction(self, grid: Grid, save_dir: str, period: int = 500, save_mode: Literal["html", "png", "pt", "show"] = "html", output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z")
     
-Функция обратного вызова(callback) для создания тепловых карт решения, полученного моделью.
+Функция обратного вызова (callback) для создания тепловых карт решения, полученного моделью.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **grid** (str) – объект класса Grid,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
+- **save_dir** (str) : директория для сохранения графика,
+- **grid** (str) : объект класса Grid,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
-- **__call__(self, trainer: Trainer))** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer)** : Использование функции обратного вызова (callback) при обучении модели.
 
 **Пример использования**
 ```python
@@ -160,16 +194,26 @@ trainer.train()
 ## PlotHeatmapSolution
 
     CLASS callbacks.heatmap.PlotHeatmapSolution(self, save_dir: str, grid: Grid, solution: Callable[[torch.Tensor], torch.Tensor],
-                 save_mode: str = 'html')
+                 save_mode: str = 'html', min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z"))
     
-Класс для построения графика точного решения. Это не функция обратного вызова(callback)!
+Класс для построения графика точного решения.
+> **_Важно:_** Это не функция обратного вызова (callback)!
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **grid** (str) – объект класса Grid,
-- **solution** — функция точного решения,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую тепловую карту в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную).
+- **save_dir** (str) : директория для сохранения графика,
+- **grid** (str) : объект класса Grid,
+- **solution** : функция точного решения,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Пример использования**
 ```python
@@ -182,38 +226,104 @@ save_dir = "reports"
 PlotHeatmapSolution(save_dir, grid=grid, solution=exact_solution, save_mode='show')
 ```
 
-## BasicCurve
-    CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True)
-Абстрактный класс для наследования другими классами тепловых карт.
+## MeshHeatmapPrediction
+
+    CLASS callbacks.heatmap.MeshHeatmapPrediction(self, save_dir: str, period: int, points: torch.Tensor, save_mode: str = 'html', output_index: int = 0, min = None, max = None, x_name: float  = "x", y_name: str  = "y", z_name: str = "z"))
+Функция обратного вызова (callback) для построения тепловой карты (heatmap) решения на mesh сетке.
+
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
-- **log_scale**(bool) — флаг, определяющий будет ли ось OY логарифмирована.
+- **save_dir** (str) : директория для сохранения графика,
+- **period** (int) : период сохранения графиков,
+- **points** (torch.Tensor) : точки для построения графика,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **output_index** (int) : номер уравнения, график которого наобходимо построить,
+- **min** (float | None) : минимальное значение colorbar'а,
+- **max** (float | None) : максимальное значение colorbar'а,
+- **x_name** (str) : название оси абсцисс ("x" по умолчанию),
+- **y_name** (str) : название оси ординат ("y" по умолчанию),
+- **z_name** (str) : название оси аппликат ("z" по умолчанию).
 
 **Методы**
 
-- **draw(self, values: Sequence, v_names: [str], coord: np.ndarray, plot_title: str, file_name: str = None)** : Строит и сохраняет кривую.
+- **__call__(self, trainer: Trainer)** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
+```python
+from src.neural_network import FNN
+from src.PINN import PINN
+from src.callbacks.heatmap import MeshHeatmapPrediction
+
+conditions, input_dim, output_dim = src.problems.real_navier_stocks(Re=60, mesh_file_path ='../nsu_1.pt', mass=True)
+model = FNN(layers_all=[input_dim, 64, output_dim])
+pinn = PINN(model=model, conditions=conditions)
+save_dir = "reports"
+callbacks = [MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=0),
+            MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=1),
+            MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=2),
+            MeshHeatmapPrediction(save_dir, 1000,  pinn.conditions[0].geometry.points[::10], min=-5, max=5, output_index=3)]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks=callbacks)
+trainer.train()
+```
+
+## BasicCurve
+    CLASS callbacks.curve.BasicCurve(self, save_dir: str, period: int = 500, save_mode: str = 'html', log_scale: bool = True, x_title: str = "Epoch", y_title: str = "Loss")
+Абстрактный класс для наследования другими классами кривых.
+
+**Параметры**
+
+- **save_dir** (str) : директория для сохранения графика,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована,
+- **x_title** (str) : название оси абсцисс (по умочанию "Epoch"),
+- **y_title** (str) : название оси ординат (по умолчанию "Loss"),
+- **metric_history** (list) : список для сохранения истории значений метркии.
+
+**Методы**
+
+- **draw(self, values: Sequence, v_names: [str], coord: np.ndarray, plot_title: str)** : Строит и сохраняет кривую.
 - **dict_data(fig)** : Сохраняет данные графика в виде словаря.
-- **init_curve_names(self, conditions)** : Нзначает названия кривым в зависимости от conditions.
+- **init_curve_names(self, conditions)** : Нзначает названия кривым в зависимости от conditions,
+- **reset(self, new_save_dir: str = None)** : Меняет название директории для сохранения графика.
 
 ## GridResidualCurve
-    CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True)
-Функция обратного вызова(callback) для построения кривых обучения при помощи сетки.
+    CLASS callbacks.curve.GridResidualCurve(self, save_dir: str, grid: Grid, period=100, save_mode='html', log_scale: bool = True, condition_index=0)
+Функция обратного вызова (callback) для построения кривых обучения на сетке Grid.
+
+> **_Важно:_** Убедитесь, что Grid соответствует conditions.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **grid**(Grid) — Объект класса Grid,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
-- **log_scale** (bool) — флаг, определяющий будет ли ось OY логарифмирована.
+- **save_dir** (str) : директория для сохранения графика,
+- **grid**(Grid) : Объект класса Grid,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована,
+- **condition_index** (int) : номер условия для построения графика.
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
-- 
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
 **Пример использования**
 ```python
 from src.callbacks.curve import GridResidualCurve
@@ -234,18 +344,24 @@ trainer.train()
 
 ## TrainingCurve
     CLASS callbacks.curve.TrainingCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
-Функция обратного вызова(callback) для построения кривых обучения по лоссам модели.
+Функция обратного вызова (callback) для построения кривых обучения по лоссам модели.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
-- **log_scale** (bool) — флаг, определяющий будет ли ось OY логарифмирована.
+- **save_dir** (str) : директория для сохранения графика,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована.
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 ```python
 from src.callbacks.curve import TrainingCurve
 
@@ -264,18 +380,24 @@ trainer.train()
 
 ## LearningRateCurve
     CLASS callbacks.curve.LearningRateCurve(self, save_dir: str, period=100, save_mode='html', log_scale: bool = True)
-Функция обратного вызова(callback) для построения кривой learning rate.
+Функция обратного вызова (callback) для построения кривой learning rate.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
-- **log_scale** (bool) — флаг, определяющий будет ли ось OY логарифмирована.
+- **save_dir** (str) : директория для сохранения графика,
+- **period** (int) : период сохранения графиков,
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована.
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 
 ```python
 from src.callbacks.curve import LearningRateCurve
@@ -296,19 +418,25 @@ trainer.train()
 ## ErrorCurve
     CLASS callbacks.curve.ErrorCurve(self, save_dir: str, solution: Callable[[torch.Tensor], torch.Tensor], period=100, save_mode='html',
                  log_scale: bool = True)
-Функция обратного вызова(callback) для построения кривой ошибки.
+Функция обратного вызова (callback) для построения кривой ошибки.
 
 **Параметры**
 
-- **save_dir** (str) – директория для сохранения графика,
-- **solution** (Callable) — функция точного решения,
+- **save_dir** (str) : директория для сохранения графика,
+- **solution** (Callable) : функция точного решения,
 - **period** (int) – период сохранения графиков,
-- **save_mode** (str) — режим сохранения (Режимы сохранения: “html” - сохраняет каждую кривую в указанной директории в формате html; “png” - сохраняет тепловые карты в указанной директории в формате png; “pt” - сохраняет точки, по которым можно построить данную тепловую карту; “show” - открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную),
-- **log_scale** (bool) — флаг, определяющий будет ли ось OY логарифмирована.
+- **save_mode** (str) : режим сохранения. Режимы сохранения:
+    - “html” : сохраняет каждую тепловую карту в указанной директории в формате html;
+    - “png” : сохраняет тепловые карты в указанной директории в формате png;
+    - “pt” : сохраняет точки, по которым можно построить данную тепловую карту;
+    - “show” : открывает каждую тепловую карту в браузере в интерактивном режиме, далее ее можно сохранить вручную,
+- **log_scale** (bool) : флаг, определяющий будет ли ось OY логарифмирована.
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 
 ```python
 from src.callbacks.curve import ErrorCurve
@@ -328,30 +456,31 @@ trainer.train()
 
 ## ProgressBar
     CLASS callbacks.progress.ProgressBar(self, template: str, period: int = 10)
-Функция обратного вызова(callback) для обновления Progress Bar.
+Функция обратного вызова (callback) для обновления Progress Bar.
 
 **Параметры**
 
-- **template** (str) – шаблон строки, выводимой в консоль,
-- **period** (int) — периодичность использования функции обратного вызова(callback).
+- **template** (str) : шаблон строки, выводимой в консоль,
+- **period** (int) : периодичность использования функции обратного вызова (callback).
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
 - **make_message(self, trainer: Trainer) -> str** : Создание строки, выводимой в консоль.
 ## TqdmBar
     CLASS callbacks.progress.TqdmBar(self, template: str, period: int = 10)
-Функция обратного вызова(callback) для обновления Tqdm progress bar.
+Функция обратного вызова (callback) для обновления Tqdm progress bar.
 
 **Параметры**
 
-- **template** (str) – шаблон строки, выводимой в консоль,
-- **period** (int) — периодичность использования функции обратного вызова(callback).
+- **template** (str) : шаблон строки, выводимой в консоль,
+- **period** (int) : периодичность использования функции обратного вызова (callback).
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
 
+**Пример использования**
 ```python
 from src.callbacks.progress import TqdmBar
 
@@ -368,16 +497,18 @@ trainer.train()
 ```
 ## SaveModel
     CLASS callbacks.save.SaveModel(self, save_path: str, period: int = 1000)
-Функция обратного вызова(callback) для сохранения модели.
+Функция обратного вызова (callback) для сохранения модели.
 
 **Параметры**
 
-- **save_path** (str) – путь для сохранения файла(включая название),
-- **period** (int) — периодичность использования функции обратного вызова(callback).
+- **save_path** (str) : путь для сохранения файла (включая название),
+- **period** (int) : периодичность использования функции обратного вызова (callback).
 
 **Методы**
 
-- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова(callback) при обучении модели.
+- **__call__(self, trainer: Trainer) -> None** : Использование функции обратного вызова (callback) при обучении модели.
+
+**Пример использования**
 ```python
 from src.callbacks.save import SaveModel
 
@@ -394,10 +525,38 @@ trainer = Trainer(
 trainer.train()
 ```
 ## CallbacksOrganizer
-    CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback])
-Класс для сортировки функций обратного вызова(callback).
+    CLASS callbacks.callbacks_organizer.CallbacksOrganizer(self, callbacks: List[BaseCallback], mkdir: bool = True)
+Класс для сортировки и хранения функций обратного вызова (callback), а также создания директории для сохранения файлов.
 
 **Параметры**
 
-- **callbacks** (List[BaseCallback]) – список функций обратного вызова(callback).
+- **callbacks** (List[BaseCallback]) : список функций обратного вызова (callback),
+- **mkdir** (bool) : флаг создания директорий для функций обратного вызова с сохранением файлов.
 
+**Пример использования**
+```python
+save_dir = "reports"
+grid = src.callbacks.heatmap.Grid.from_pinn(pinn, 10001)
+callbacks = [  
+    src.callbacks.progress.TqdmBar('Epoch {epoch} lr={lr:.2e} Loss={loss_eq} Total={total_loss:.2e}'),  
+    src.callbacks.curve.LearningRateCurve(save_dir, 500, log_scale=False),  
+    src.callbacks.curve.LossCurve(save_dir, 100),  
+    src.callbacks.curve.GridResidualCurve(save_dir, 100, grid=grid),  
+    src.callbacks.heatmap.HeatmapPrediction(save_dir, 500, grid=grid)]
+trainer = Trainer(
+    pinn=pinn,
+    optimizer=optimizer,
+    scheduler=scheduler,
+    num_epochs=5000,
+    update_grid_every=100,
+    callbacks_organizer=CallbacksOrganizer(callbacks))
+trainer.train()
+```
+
+## EnsembleCallbacksOrganizer
+	class callbacks.callbacks_organizer.EnsembleCallbacksOrganizer(self, callbacks: List[BaseCallback])
+
+Класс для сортировки и хранения функций обратного вызова (callback) для использования в ансамбле. Класс позволяет использовать функции обратного вызова (callback) во всех моделях ансамбля.
+**Параметры**
+
+- **callbacks** (List[BaseCallback]) : список функций обратного вызова (callback).
