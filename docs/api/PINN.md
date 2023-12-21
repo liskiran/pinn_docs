@@ -18,7 +18,7 @@
 
     update_data() -> None
 
-Для каждого условия обновляет точки сетки, используя метод [update_points] Используется для ресемплинга.
+Для каждого условия обновляет точки сетки, используя метод [update_points].
 
     calculate_condition_loss(cond: Condition) -> List[torch.Tensor]
 
