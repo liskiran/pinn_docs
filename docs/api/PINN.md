@@ -35,11 +35,16 @@
 **Примеры использования**
 
 ```python
-conditions, input_dim, output_dim = src.problems.navier_stocks_equation_with_block()
+# Инициализируем проблему
+conditions, input_dim, output_dim = src.problems.navier_stocks_equation_with_block() 
 
+# Фиксируем ускоритель (GPU/CPU)
 set_device()
+
+# Создаем модель
 model = FNN(layers_all=[input_dim, 128, 128, 128, 128, output_dim])
 
+# Создаем необходимые генераторы
 generator_domain = UniformGeneratorRect(n_points=500,
                                         n_dims=input_dim,
                                         method='uniform',
@@ -56,7 +61,9 @@ generators_config = [
 
 configure_generators(conditions, generators_config, default_gen=generator_bound)
 
+# Создаем объект PINN
 pinn = PINN(model=model, conditions=conditions)
+
 optimizer = torch.optim.Adam(model.parameters())
 
 scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9999)
