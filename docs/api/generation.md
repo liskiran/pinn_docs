@@ -26,6 +26,14 @@
 
 - **generate_uniform(self, geometry: RectangleArea)** -> (torch.tensor, torch.tensor) : реализует равномерную случайную генерацию точек в области.
 
+
+**Пример**
+
+```python
+generator_domain = UniformGeneratorRect(n_points=5000,
+                                            method='uniform')
+```
+
 ## AdaptiveGeneratorRect
     class AdaptiveGeneratorRect(self, n_points, method: str, power_coeff=3, add_coeff=1, density_rec_points_num=None,
                  add_points=None, n_points_up_bnd=None):
@@ -66,6 +74,14 @@ $p(x) \propto \frac{\xi^k (x)}{E[\xi^k (x)]} + c$, позволяющее рег
 
 - **sample_from_density(self, errors, points_num)** -> (torch.tensor) : применяет вероятностное преобразование и генерирует из него подвыборку 
 
+**Пример**
+
+```python
+generator_domain = AdaptiveGeneratorRect(2048, 'RAG', power_coeff=3, add_coeff=0,
+                                          density_rec_points_num=8192, add_points=32)
+```
+
+
 
 ## UniformGeneratorMesh
     class UniformGeneratorMesh(self, n_points, method)
@@ -82,3 +98,9 @@ $p(x) \propto \frac{\xi^k (x)}{E[\xi^k (x)]} + c$, позволяющее рег
 - **generate(self, geometry: RectangleArea, condition: Condition, model)** -> (torch.tensor, torch.tensor) : общий метод генерации точек. Не содержит в себе реализацию метода, выполняет функцию вызова нужной реализации, на основе параметров генератора.
 
 - **uniform_sample(self, geometry: MeshArea)** -> (torch.tensor, torch.tensor) : генерирует подвыборку точек из множества точек, находящихся в mesh файле. 
+
+**Пример**
+
+```python
+generator_domain = UniformGeneratorMesh(n_points = 15000, method = 'uniform_sample')
+```
