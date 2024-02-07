@@ -25,6 +25,14 @@
 
 - **generate_points** (condition, model) -> (torch.tensor, torch.tensor) : функция генерации точек, лежащих в заданных границах области
 
+**Пример**
+
+```python
+inlet_reg = RectangleArea(low=[0.0, 0.0], high=[5.0, 1.0])
+middle_reg = RectangleArea(low=[4.0, 1.0], high=[5.0, 2.0])
+outlet_reg = RectangleArea(low=[4.0, 2.0], high=[9.0, 3.0])
+```
+
 ## MeshStorage
     class MeshStorage(self, points: torch.Tensor, generator:BaseGenerator = None)
 
@@ -40,6 +48,18 @@
 
 - **generate_points** (condition, model) -> (torch.tensor, torch.tensor) : функция генерации точек
 
+**Пример**
+
+```python
+mesh_sol = meshio.read(solution_file_path)  # считываем точки из файла
+points = mesh_sol.points
+slice_range = [0.5, 0.5 + 0.05]
+indices = (points[:, 2] >= slice_range[0]) & (points[:, 2] <= slice_range[1])  # фильтруем точки, берем только те, которые лежат в нужном диапазоне
+points = torch.tensor(points[indices1].astype(np.float32))
+slice_points = MeshStorage(points)  # создаем объект MeshStorage
+```
+
+
 
 
 ## MeshArea
@@ -50,7 +70,7 @@
 **Параметры** 
 
 
-- **n_points** (torch.tensor) : количество точек
+- **n_connections** (torch.tensor) : количество точек
 - **n_dims** (torch.tensor) : размерность области
 - **points** (torch.tensor) :  точки  используемые для обучения
 - **normals** (torch.tensor) :  нормали в точках для обучения. Присутствуют только в граничных точках
@@ -59,4 +79,17 @@
 **Методы**
 
 - **generate_points** (condition, model) -> (torch.tensor, torch.tensor) : функция генерации точек
+
+**Пример**
+
+```python
+
+mesh_grid = GridReader().read(mesh_file_path)  # Считываем файл. Может использоваться файл с .pt расширением
+zone_names = mesh_grid.zones_names  # достаём названия областей
+
+inner_dom = MeshArea(mesh_grid.get_face_by_id(zone_names['inner_zone']), mesh_grid.dim)
+walls_dom = MeshArea(mesh_grid.get_face_by_id(zone_names['wall_zone']), mesh_grid.dim)
+inlet_dom = MeshArea(mesh_grid.get_face_by_id(zone_names['inlet_zone']), mesh_grid.dim)
+outlet_dom = MeshArea(mesh_grid.get_face_by_id(zone_names['outlet_zone']), mesh_grid.dim) # cоздаем объекты областей
+```
 
