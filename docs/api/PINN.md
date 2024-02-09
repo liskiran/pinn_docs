@@ -10,7 +10,7 @@
 **Параметры**
 
 - **model** (torch.nn.Module) – PyTorch модель. Например, [FNN](neural_network.md#feed-forward-neural-network). 
-- **conditions** (List[[Condition](condition.md)]) – список условий, каждое из которых характеризует отдельное уравнение или граничное/начальное условие. 
+- **conditions** (List[[Condition]]) – список условий, каждое из которых характеризует отдельное уравнение или граничное/начальное условие. 
 - **loss_function** (torch.nn.modules.loss) – функция потерь. По умолчанию [torch.nn.MSELoss](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html).
     
 
