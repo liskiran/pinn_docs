@@ -1,4 +1,4 @@
-site_name: PINN-ADT
+site_name: MULTIPINN 
 
 hidden: "internal_endpoints.md"
 
@@ -7,6 +7,7 @@ nav:
   - Руководство:
       - Начало работы: "guide/getting_started.md"
       - Ансамблирование: "guide/ensemble.ipynb"
+      - Hydra: "guide/hydra.md"
   - API:
       - PINN: "api/PINN.md"
       - Neural Network: "api/neural_network.md"
@@ -19,10 +20,13 @@ nav:
       - Regularization: "api/regularization.md"
       - Mesh: "api/mesh.md"
       - Utils: "api/utils.md"
-  - Как писать документацию: "how_to_use.md"
 
 theme:
-  name: material
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - python
   features:
     - content.code.copy
     - content.code.select
