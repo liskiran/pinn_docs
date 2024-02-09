@@ -5,7 +5,7 @@ hidden: "internal_endpoints.md"
 nav:
   - Главная: "index.md"
   - Руководство:
-      - Начало работы: "guide/getting_started.md"
+      - Начало работы: "guide/getting_started.ipynb"
       - Ансамблирование: "guide/ensemble.ipynb"
       - Hydra: "guide/hydra.md"
   - API:
@@ -22,11 +22,7 @@ nav:
       - Utils: "api/utils.md"
 
 theme:
-  name: readthedocs
-  highlightjs: true
-  hljs_languages:
-    - yaml
-    - python
+  name: material
   features:
     - content.code.copy
     - content.code.select
@@ -34,6 +30,8 @@ theme:
 
 plugins:
   - mkdocs-jupyter
+  # - search
+  # - pdf-export
 
 markdown_extensions:
   - pymdownx.highlight:
